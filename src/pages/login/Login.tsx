@@ -43,7 +43,6 @@ const Login = () => {
     try {
       const response = await services.loginUser(loginUserDTO);
       apiClient.saveToken(response.data.token);
-
       const decoded: decodedUser = jwt_decode(response.data.token);
       decoded && localStorage.setItem('username', decoded.user);
 
