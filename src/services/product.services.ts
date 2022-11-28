@@ -10,8 +10,13 @@ const getById = async (id:number) => {
     return await apiClient.get(`products/${id}`);
 }
 
+const loginUser = async (loginUserDTO: object) => {
+    return await apiClient.post(`/auth/login`, loginUserDTO, {'Access-Control-Allow-Origin': '*'});
+}
+
 const productServices = {
     getAll,
     getById,
+    loginUser,
 }
 export default productServices;
