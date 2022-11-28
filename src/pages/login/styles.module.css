@@ -1,0 +1,23 @@
+.loadingWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+}
+
+.displayWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 1024px) {
+
+}
+
+@media only screen and (max-width: 800px) {
+
+}

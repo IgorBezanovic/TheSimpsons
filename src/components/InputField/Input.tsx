@@ -1,8 +1,8 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
+import styles from "./styles.module.css";
 
-
-const Input = ({ label, error = false }: {label: string, error: boolean}) => {
+const Input = ({ label, error = false, onChange }: { label: string, error: boolean, onChange: (e: any) => void }) => {
   const isError = error ? error : false;
 
   return (
@@ -10,7 +10,9 @@ const Input = ({ label, error = false }: {label: string, error: boolean}) => {
       error={isError}
       id="outlined-error-helper-text"
       label={label}
-      helperText={isError ? 'Incorrect entry.' : ''}
+      helperText={isError && 'Incorrect entry.'}
+      className={styles.marginBottom30}
+      onChange={onChange}
     />
   )
 }

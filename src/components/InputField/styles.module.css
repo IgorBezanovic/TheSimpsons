@@ -1,6 +1,3 @@
-.btn {
-    background-color:aliceblue;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-}
+.marginBottom30 {
+    margin-bottom: 30px !important;
+  }
