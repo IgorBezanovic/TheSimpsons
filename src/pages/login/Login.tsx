@@ -10,6 +10,7 @@ import jwt_decode from "jwt-decode";
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { lightBlue, red } from '@mui/material/colors';
+import { useNavigate } from 'react-router-dom';
 
 type userDTO = {
   username: string;
@@ -31,6 +32,7 @@ const Login = () => {
   });
 
   const apiClient = BaseHttpService();
+  const navigate = useNavigate();
 
   const handleLogin = async (event: any) => {
     event.preventDefault();
@@ -50,6 +52,8 @@ const Login = () => {
         username: "",
         password: "",
       });
+
+      navigate("/");
     } catch (error) {
       console.log('Bad credentials');
     }
@@ -73,6 +77,7 @@ const Login = () => {
           type="text"
           error={!loginUserDTO.username && isError}
           onChange={(e: any) => handleUserData('username', e.target.value)}
+          value={loginUserDTO.username}
         />
         <div className={styles.passwordWrapper}>
           <Input
@@ -80,6 +85,7 @@ const Login = () => {
             type={isVisible ? "text" : "password"}
             error={!loginUserDTO.password && isError}
             onChange={(e: any) => handleUserData('password', e.target.value)}
+            value={loginUserDTO.password}
             />
             <div className={styles.visibilityWrapper}>
               {isVisible ? 
