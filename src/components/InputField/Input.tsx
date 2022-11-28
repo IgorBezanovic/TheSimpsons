@@ -8,7 +8,8 @@ const Input = ({ label, error = false, onChange }: { label: string, error: boole
   return (
     <TextField
       error={isError}
-      id="outlined-error-helper-text"
+      id={`outlined-error-helper-text_${label}`}
+      type={label === 'Password' ? 'password' : 'text'}
       label={label}
       helperText={isError && 'Incorrect entry.'}
       className={styles.marginBottom30}
