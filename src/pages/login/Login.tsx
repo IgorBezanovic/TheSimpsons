@@ -7,6 +7,9 @@ import styles from "./styles.module.css";
 import services from "../../services/auth.services";
 import BaseHttpService from "../../services/base-http.service";
 import jwt_decode from "jwt-decode";
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { lightBlue, red } from '@mui/material/colors';
 
 type userDTO = {
   username: string;
@@ -21,9 +24,10 @@ type decodedUser = {
 
 const Login = () => {
   const [isError, setIsError] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const [loginUserDTO, setLoginUserDTO] = useState<userDTO>({
-    username: "johnd",
-    password: "m38rmF$",
+    username: "",
+    password: "",
   });
 
   const apiClient = BaseHttpService();
@@ -39,6 +43,7 @@ const Login = () => {
     try {
       const response = await services.loginUser(loginUserDTO);
       apiClient.saveToken(response.data.token);
+
       const decoded: decodedUser = jwt_decode(response.data.token);
       decoded && localStorage.setItem('username', decoded.user);
 
@@ -47,13 +52,18 @@ const Login = () => {
         password: "",
       });
     } catch (error) {
-      if (typeof error === "string") {
-        console.error(error.toUpperCase());
-      } else if (error instanceof Error) {
-        console.error(error.message);
-      }
+      console.log('Bad credentials');
     }
   };
+
+  const handlePasswordVisibility = () => {
+    setIsVisible(!isVisible)
+  }
+
+  const handleUserData = (name: string, value: string) => {
+    setLoginUserDTO({ ...loginUserDTO, 
+      [name]: value })
+  }
 
   return (
     <div className={styles.loadingWrapper}>
@@ -61,27 +71,42 @@ const Login = () => {
       <div className={styles.displayWrapper}>
         <Input
           label="Username"
+          type="text"
           error={!loginUserDTO.username && isError}
-          onChange={(e: any) =>
-            setLoginUserDTO({ ...loginUserDTO, username: e.target.value })
-          }
+          onChange={(e: any) => handleUserData('username', e.target.value)}
         />
-        <Input
-          label="Password"
-          error={!loginUserDTO.password && isError}
-          onChange={(e: any) =>
-            setLoginUserDTO({ ...loginUserDTO, password: e.target.value })
-          }
-        />
+        <div className={styles.passwordWrapper}>
+          <Input
+            label="Password"
+            type={isVisible ? "text" : "password"}
+            error={!loginUserDTO.password && isError}
+            onChange={(e: any) => handleUserData('password', e.target.value)}
+            />
+            <div className={styles.visibilityWrapper}>
+              {isVisible ? 
+                <VisibilityIcon 
+                  onClick={handlePasswordVisibility}
+                  className={styles.visibilityIcon}
+                  style={{ color: red[900] }}
+                  /> 
+                : 
+                <VisibilityOffIcon
+                  onClick={handlePasswordVisibility}
+                  className={styles.visibilityIcon}
+                  style={{ color: lightBlue[900] }}
+                  />
+              }
+            </div>
+        </div>
         <Button variant="outlined" onClick={handleLogin}>
           Submit
         </Button>
-        <p>
+        <p className={styles.userData}>
           User for testing purposes: <br />
           <em>
-            username:'johnd',
+            <strong>username: </strong>johnd
             <br />
-            password:'m38rmF$',
+            <strong>password: </strong>m38rmF$
           </em>
         </p>
       </div>

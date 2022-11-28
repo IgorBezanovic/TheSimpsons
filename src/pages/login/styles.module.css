@@ -9,15 +9,30 @@
 .displayWrapper {
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  padding: 100px 40px;
   max-width: 400px;
   margin: 0 auto;
 }
 
-@media only screen and (max-width: 1024px) {
-
+.passwordWrapper {
+  position: relative;
+  width: 100%;
 }
 
-@media only screen and (max-width: 800px) {
+.visibilityWrapper {
+  position: absolute;
+  top: 0;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  right: 20px;
+}
 
+.visibilityIcon{
+  cursor: pointer;
+}
+
+.userData{
+  color: grey;
+  margin-top: 20px;
 }
