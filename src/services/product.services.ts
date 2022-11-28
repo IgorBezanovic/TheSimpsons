@@ -11,7 +11,7 @@ const getById = async (id:number) => {
 }
 
 const loginUser = async (loginUserDTO: object) => {
-    return await apiClient.post(`/auth/login`, loginUserDTO, {'Access-Control-Allow-Origin': '*'});
+    return await apiClient.post(`/auth/login`, loginUserDTO);
 }
 
 const productServices = {
