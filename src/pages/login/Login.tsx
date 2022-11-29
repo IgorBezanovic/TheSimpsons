@@ -7,21 +7,11 @@ import styles from "./styles.module.css";
 import services from "../../services/auth.services";
 import BaseHttpService from "../../services/base-http.service";
 import jwt_decode from "jwt-decode";
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import { lightBlue, red } from '@mui/material/colors';
-import { useNavigate } from 'react-router-dom';
-
-type userDTO = {
-  username: string;
-  password: string;
-};
-
-type decodedUser = {
-  iat: number;
-  sub: number;
-  user: string;
-};
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { lightBlue, red } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
+import { decodedUser, userDTO } from "common/types/Login.type";
 
 const Login = () => {
   const [isError, setIsError] = useState<boolean>(false);
@@ -46,7 +36,7 @@ const Login = () => {
       const response = await services.loginUser(loginUserDTO);
       apiClient.saveToken(response.data.token);
       const decoded: decodedUser = jwt_decode(response.data.token);
-      decoded && localStorage.setItem('username', decoded.user);
+      decoded && localStorage.setItem("username", decoded.user);
 
       setLoginUserDTO({
         username: "",
@@ -55,18 +45,17 @@ const Login = () => {
 
       navigate("/");
     } catch (error) {
-      console.log('Bad credentials');
+      console.log("Bad credentials");
     }
   };
 
   const handlePasswordVisibility = () => {
-    setIsVisible(!isVisible)
-  }
+    setIsVisible(!isVisible);
+  };
 
   const handleUserData = (name: string, value: string) => {
-    setLoginUserDTO({ ...loginUserDTO, 
-      [name]: value })
-  }
+    setLoginUserDTO({ ...loginUserDTO, [name]: value });
+  };
 
   return (
     <div className={styles.loadingWrapper}>
@@ -76,7 +65,7 @@ const Login = () => {
           label="Username"
           type="text"
           error={!loginUserDTO.username && isError}
-          onChange={(e: any) => handleUserData('username', e.target.value)}
+          onChange={(e: any) => handleUserData("username", e.target.value)}
           value={loginUserDTO.username}
         />
         <div className={styles.passwordWrapper}>
@@ -84,24 +73,24 @@ const Login = () => {
             label="Password"
             type={isVisible ? "text" : "password"}
             error={!loginUserDTO.password && isError}
-            onChange={(e: any) => handleUserData('password', e.target.value)}
+            onChange={(e: any) => handleUserData("password", e.target.value)}
             value={loginUserDTO.password}
-            />
-            <div className={styles.visibilityWrapper}>
-              {isVisible ? 
-                <VisibilityIcon 
-                  onClick={handlePasswordVisibility}
-                  className={styles.visibilityIcon}
-                  style={{ color: red[900] }}
-                  /> 
-                : 
-                <VisibilityOffIcon
-                  onClick={handlePasswordVisibility}
-                  className={styles.visibilityIcon}
-                  style={{ color: lightBlue[900] }}
-                  />
-              }
-            </div>
+          />
+          <div className={styles.visibilityWrapper}>
+            {isVisible ? (
+              <VisibilityIcon
+                onClick={handlePasswordVisibility}
+                className={styles.visibilityIcon}
+                style={{ color: red[900] }}
+              />
+            ) : (
+              <VisibilityOffIcon
+                onClick={handlePasswordVisibility}
+                className={styles.visibilityIcon}
+                style={{ color: lightBlue[900] }}
+              />
+            )}
+          </div>
         </div>
         <Button variant="outlined" onClick={handleLogin}>
           Submit
