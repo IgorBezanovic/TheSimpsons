@@ -1,5 +1,50 @@
 .footer {
-    padding:20px;
+  background-color: #27334d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3em 0;
+}
+
+.header {
+  font-size: 1.2em;
+  color: white;
+  margin-bottom: 0.5em;
+}
+
+.text {
+  font-size: 1rem;
+  color: white;
+  margin-bottom: 0.5em;
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.socialIcons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 40%;
+}
+
+@media (min-width: 768px) {
+  .footer {
     background-color: #27334d;
-    min-height: 200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 3em 0;
+  }
+
+  .socialIcons {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
 }
