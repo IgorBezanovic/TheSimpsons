@@ -1,10 +1,12 @@
 import { memo } from "react";
-import CartBadge from "components/CartBadge";
-import WishlistBadge from "components/WishlistBadge";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo_transparent.png";
 import Container from "components/Container";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { isLoggedIn } from "context/user";
 
 export const Header = () => {
   return (
@@ -25,8 +27,13 @@ export const Header = () => {
             </ul>
           </nav>
           <div className="flex">
-            <WishlistBadge />
-            <CartBadge />
+            <FavoriteBorderIcon className={styles.headerIcon} />
+            <ShoppingCartOutlinedIcon className={styles.headerIcon} />
+            {isLoggedIn && (
+              <Link to={"/profile"}>
+                <AccountCircleOutlinedIcon className={styles.headerIcon} />
+              </Link>
+            )}
           </div>
         </div>
       </Container>

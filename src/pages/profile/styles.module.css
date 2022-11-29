@@ -1,0 +1,20 @@
+.userProfile {
+  display: flex;
+}
+
+.profileImage {
+  width: 15em;
+  height: 15em;
+  margin-right: 2em;
+}
+
+.userData {
+  width: 100%;
+  padding-right: 5em;
+}
+
+.userDataHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

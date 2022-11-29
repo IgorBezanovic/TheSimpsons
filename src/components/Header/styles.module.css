@@ -1,32 +1,45 @@
 .header {
-    padding: 5px;
-   
-    background-color: #1942f5;
+  padding: 5px;
+  background-color: #1942f5;
 }
 
 .header_content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .mainNav {
-    vertical-align: middle;
-    display: inline;
-    background-color: red;
+  vertical-align: middle;
+  display: inline;
+  background-color: red;
 }
+
 .logo_wrapp {
-    max-width: 50px;
+  max-width: 50px;
 }
+
 .nav_items {
   list-style: none;
   display: flex;
   margin: 0;
 }
+
 .nav_item {
-    padding: 10px;
-    margin-left: 5px;
-    background-color: blue;
-    color:white;
-    cursor: pointer;
+  padding: 10px;
+  margin-left: 5px;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+
+.headerIcon {
+  color: white;
+  margin-left: 0.5em;
+}
+
+.headerIcon:hover {
+  color: rgb(255, 0, 0);
+  transform: translateY(-0.1em);
+  transition: 0.3s ease-in-out;
 }
