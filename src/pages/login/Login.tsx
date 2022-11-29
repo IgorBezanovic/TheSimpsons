@@ -12,6 +12,8 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { lightBlue, red } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 import { decodedUser, userDTO } from "common/types/Login.type";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [isError, setIsError] = useState<boolean>(false);
@@ -45,7 +47,14 @@ const Login = () => {
 
       navigate("/");
     } catch (error) {
-      console.log("Bad credentials");
+      toast.error("Bad credentials", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        theme: "light",
+      });
     }
   };
 
@@ -60,6 +69,7 @@ const Login = () => {
   return (
     <div className={styles.loadingWrapper}>
       <Headline title="Login" />
+      <ToastContainer />
       <div className={styles.displayWrapper}>
         <Input
           label="Username"
