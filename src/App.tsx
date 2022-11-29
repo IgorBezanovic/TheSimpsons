@@ -8,13 +8,11 @@ import {
   NotFoundPage,
   CartPage,
   LoginPage,
+  ProfilePage,
 } from "pages";
+import { isLoggedIn } from "context/user";
 
 function App() {
-  const user: string = localStorage.getItem("accessToken")
-    ? localStorage.getItem("accessToken")!
-    : "";
-
   const ProtectedRoute = ({
     user,
     children,
@@ -37,7 +35,7 @@ function App() {
           <Route
             path="/example"
             element={
-              <ProtectedRoute user={user}>
+              <ProtectedRoute user={isLoggedIn}>
                 <ExamplePage />
               </ProtectedRoute>
             }
@@ -45,8 +43,16 @@ function App() {
           <Route
             path="/cart"
             element={
-              <ProtectedRoute user={user}>
+              <ProtectedRoute user={isLoggedIn}>
                 <CartPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute user={isLoggedIn}>
+                <ProfilePage />
               </ProtectedRoute>
             }
           />
