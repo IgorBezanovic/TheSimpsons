@@ -8,6 +8,7 @@ import {
   NotFoundPage,
   CartPage,
   LoginPage,
+  CheckoutPage,
 } from "pages";
 
 function App() {
@@ -47,6 +48,14 @@ function App() {
             element={
               <ProtectedRoute user={user}>
                 <CartPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute user={user}>
+                <CheckoutPage />
               </ProtectedRoute>
             }
           />
