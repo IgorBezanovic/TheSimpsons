@@ -1,12 +1,14 @@
-import BaseHttpService from './base-http.service'
+import BaseHttpService from "./base-http.service";
 
-const apiClient =  BaseHttpService();
+const apiClient = BaseHttpService();
 
-const loginUser = async (loginUserDTO: object) => {
-    return await apiClient.post(`auth/login`, loginUserDTO);
-}
+const loginUser = async (loginUserDTO: object): Promise<{ token: string }> => {
+  const response = await apiClient.post(`auth/login`, loginUserDTO);
 
-const authServices = {
-    loginUser,
-}
-export default authServices;
+  return response.data;
+};
+
+const authService = {
+  loginUser,
+};
+export default authService;
