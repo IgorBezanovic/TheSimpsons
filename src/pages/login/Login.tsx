@@ -9,9 +9,11 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { lightBlue, red } from "@mui/material/colors";
 import { userDTO } from "common/types/Login.type";
 import AuthContext from "context/user/auth.context";
+import LoadingContext from "context/loading/loading.context";
 
 const Login = () => {
   const authCtx = useContext(AuthContext);
+  const loadingCtx = useContext(LoadingContext);
 
   const [isError, setIsError] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -28,7 +30,9 @@ const Login = () => {
     if (!loginUserDTO.password)
       return [console.log("Password is empty"), setIsError(true)];
 
-    authCtx.onLogin(loginUserDTO);
+    loadingCtx.show();
+    await authCtx.onLogin(loginUserDTO);
+    loadingCtx.hide();
   };
 
   const handlePasswordVisibility = () => {

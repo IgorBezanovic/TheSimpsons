@@ -7,6 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContextProvider } from "context/user/auth.context";
+import { LoadingContextProvider } from "context/loading/loading.context";
+import Spinner from "components/Spinner/spinner";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,9 +16,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <BrowserRouter>
     <ToastContainer />
-    <AuthContextProvider>
-      <App />
-    </AuthContextProvider>
+    <LoadingContextProvider>
+      <Spinner />
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
+    </LoadingContextProvider>
   </BrowserRouter>
 );
 

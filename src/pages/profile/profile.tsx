@@ -5,17 +5,26 @@ import { AppLayout } from "components/Layouts";
 import userService from "services/user.service";
 import styles from "./styles.module.css";
 import AuthContext from "context/user/auth.context";
+import LoadingContext from "context/loading/loading.context";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const authCtx = useContext(AuthContext);
+  const loadingCtx = useContext(LoadingContext);
 
   const [user, setUser] = useState<userType>();
 
-  const fetchUserData = async () => {
-    const id = authCtx.id;
-    const res = await userService.userProfile(id);
+  const fetchUserData = async (id: number) => {
+    try {
+      loadingCtx.show();
+      const res = await userService.userProfile(id);
 
-    return setUser(res.data);
+      setUser(res.data);
+      loadingCtx.hide();
+    } catch (error) {
+      loadingCtx.hide();
+      toast.info("Unable to fetch user profile data");
+    }
   };
 
   const logout = () => {
@@ -23,7 +32,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    fetchUserData();
+    fetchUserData(authCtx.id);
     // eslint-disable-next-line
   }, []);
 
