@@ -51,7 +51,7 @@ const Login = () => {
           label="Username"
           type="text"
           error={!loginUserDTO.username && isError}
-          onChange={(e: any) => handleUserData("username", e.target.value)}
+          onChange={(e: React.BaseSyntheticEvent<Event>) => handleUserData("username", e.target.value)}
           value={loginUserDTO.username}
         />
         <div className={styles.passwordWrapper}>
@@ -59,7 +59,7 @@ const Login = () => {
             label="Password"
             type={isVisible ? "text" : "password"}
             error={!loginUserDTO.password && isError}
-            onChange={(e: any) => handleUserData("password", e.target.value)}
+            onChange={(e: React.BaseSyntheticEvent<Event>) => handleUserData("password", e.target.value)}
             value={loginUserDTO.password}
           />
           <div className={styles.visibilityWrapper}>

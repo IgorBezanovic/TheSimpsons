@@ -5,15 +5,19 @@ import styles from "./styles.module.css";
 const Input = ({
   label,
   error = false,
+  name = "",
   onChange,
   type,
   value,
+  errorMessage = "Incorrect entry.",
 }: {
   label: string;
   error: boolean;
+  name?: string;
   onChange: (e: any) => void;
   type: string;
   value: string;
+  errorMessage?: string
 }) => {
   const isError = error ? error : false;
 
@@ -23,11 +27,12 @@ const Input = ({
       id={`outlined-error-helper-text_${label}`}
       type={type}
       label={label}
-      helperText={isError && "Incorrect entry."}
+      helperText={isError && errorMessage}
       className={styles.marginBottom30}
       onChange={onChange}
       fullWidth
       defaultValue={value}
+      name={name}
     />
   );
 };
