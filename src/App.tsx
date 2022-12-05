@@ -10,17 +10,20 @@ import {
   LoginPage,
   ProfilePage,
 } from "pages";
-import { isLoggedIn } from "context/user";
+import { useContext } from "react";
+import AuthContext from "context/user/auth.context";
 
 function App() {
+  const authCtx = useContext(AuthContext);
+
   const ProtectedRoute = ({
-    user,
+    isLoggedIn,
     children,
   }: {
-    user: string;
+    isLoggedIn: boolean;
     children: any;
   }) => {
-    if (!user) {
+    if (!isLoggedIn) {
       return <Navigate to="/login" replace />;
     }
 
@@ -35,7 +38,7 @@ function App() {
           <Route
             path="/example"
             element={
-              <ProtectedRoute user={isLoggedIn}>
+              <ProtectedRoute isLoggedIn={authCtx.isLoggedIn}>
                 <ExamplePage />
               </ProtectedRoute>
             }
@@ -43,7 +46,7 @@ function App() {
           <Route
             path="/cart"
             element={
-              <ProtectedRoute user={isLoggedIn}>
+              <ProtectedRoute isLoggedIn={authCtx.isLoggedIn}>
                 <CartPage />
               </ProtectedRoute>
             }
@@ -51,7 +54,7 @@ function App() {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute user={isLoggedIn}>
+              <ProtectedRoute isLoggedIn={authCtx.isLoggedIn}>
                 <ProfilePage />
               </ProtectedRoute>
             }

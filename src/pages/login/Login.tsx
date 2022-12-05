@@ -1,29 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Headline from "components/Headline";
 import Input from "components/InputField";
 import Footer from "components/Footer";
 import Button from "@mui/material/Button";
 import styles from "./styles.module.css";
-import services from "../../services/auth.services";
-import BaseHttpService from "../../services/base-http.service";
-import jwt_decode from "jwt-decode";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { lightBlue, red } from "@mui/material/colors";
-import { useNavigate } from "react-router-dom";
-import { decodedUser, userDTO } from "common/types/Login.type";
-import { toast } from "react-toastify";
+import { userDTO } from "common/types/Login.type";
+import AuthContext from "context/user/auth.context";
 
 const Login = () => {
+  const authCtx = useContext(AuthContext);
+
   const [isError, setIsError] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [loginUserDTO, setLoginUserDTO] = useState<userDTO>({
     username: "",
     password: "",
   });
-
-  const apiClient = BaseHttpService();
-  const navigate = useNavigate();
 
   const handleLogin = async (event: any) => {
     event.preventDefault();
@@ -33,28 +28,7 @@ const Login = () => {
     if (!loginUserDTO.password)
       return [console.log("Password is empty"), setIsError(true)];
 
-    try {
-      const response = await services.loginUser(loginUserDTO);
-      apiClient.saveToken(response.data.token);
-      const decoded: decodedUser = jwt_decode(response.data.token);
-      decoded && localStorage.setItem("username", decoded.user);
-
-      setLoginUserDTO({
-        username: "",
-        password: "",
-      });
-
-      navigate("/");
-    } catch (error) {
-      toast.error("Bad credentials", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        theme: "light",
-      });
-    }
+    authCtx.onLogin(loginUserDTO);
   };
 
   const handlePasswordVisibility = () => {

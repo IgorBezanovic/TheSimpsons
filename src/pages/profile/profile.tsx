@@ -1,33 +1,30 @@
+import { useContext, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import { userType } from "common/types/User.type";
 import { AppLayout } from "components/Layouts";
-import { userId } from "context/user";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import userService from "services/user.service";
 import styles from "./styles.module.css";
+import AuthContext from "context/user/auth.context";
 
 const Profile = () => {
+  const authCtx = useContext(AuthContext);
+
   const [user, setUser] = useState<userType>();
-  const navigate = useNavigate();
 
   const fetchUserData = async () => {
-    const id = userId();
-
+    const id = authCtx.id;
     const res = await userService.userProfile(id);
 
-    console.log(res.data);
     return setUser(res.data);
   };
 
   const logout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("username");
-    navigate("/");
+    authCtx.onLogout();
   };
 
   useEffect(() => {
     fetchUserData();
+    // eslint-disable-next-line
   }, []);
 
   return (

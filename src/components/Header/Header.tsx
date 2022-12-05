@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { useContext } from "react";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo_transparent.png";
@@ -6,9 +6,11 @@ import Container from "components/Container";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { isLoggedIn } from "context/user";
+import AuthContext from "context/user/auth.context";
 
 export const Header = () => {
+  const authCtx = useContext(AuthContext);
+
   return (
     <header className={styles.header}>
       <Container>
@@ -29,7 +31,7 @@ export const Header = () => {
           <div className="flex">
             <FavoriteBorderIcon className={styles.headerIcon} />
             <ShoppingCartOutlinedIcon className={styles.headerIcon} />
-            {isLoggedIn && (
+            {authCtx.isLoggedIn && (
               <Link to={"/profile"}>
                 <AccountCircleOutlinedIcon className={styles.headerIcon} />
               </Link>
@@ -41,4 +43,4 @@ export const Header = () => {
   );
 };
 
-export default memo(Header);
+export default Header;
