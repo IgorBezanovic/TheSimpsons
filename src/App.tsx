@@ -9,6 +9,7 @@ import {
   CartPage,
   LoginPage,
   ProfilePage,
+  CheckoutPage,
 } from "pages";
 import { useContext } from "react";
 import AuthContext from "context/user/auth.context";
@@ -56,6 +57,14 @@ function App() {
             element={
               <ProtectedRoute isLoggedIn={authCtx.isLoggedIn}>
                 <ProfilePage />
+                </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute isLoggedIn={authCtx.isLoggedIn}>
+                <CheckoutPage />
               </ProtectedRoute>
             }
           />
