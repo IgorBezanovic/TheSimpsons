@@ -5,9 +5,12 @@ import Input from "components/InputField";
 import { useFormik } from "formik";
 import { checkoutValidationSchema } from "common/validations/checkout-user";
 import { Button } from "@mui/material";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const [errors, setErrors] = useState<any>()
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -23,17 +26,19 @@ const Checkout = () => {
     validationSchema: checkoutValidationSchema,
 
     onSubmit: (values) => {
+      formik.resetForm();
       alert(JSON.stringify(values, null, 2));
     },
   });
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrors(formik.errors);
 
-    // Send EmailJS
-    // Reset form values when email is sent
-
-    setErrors(formik.errors)
+    if(Object.keys(formik.errors).length === 0){
+      toast.success("Your order has sent.");
+      navigate("/");
+    }
   };
 
   return (
