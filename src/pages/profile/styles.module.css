@@ -1,20 +1,45 @@
 .userProfile {
   display: flex;
+  flex-direction: column;
+  padding: 0 1em;
 }
 
 .profileImage {
   width: 15em;
   height: 15em;
-  margin-right: 2em;
 }
 
 .userData {
   width: 100%;
-  padding-right: 5em;
 }
 
 .userDataHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .userProfile {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .profileImage {
+    width: 15em;
+    height: 15em;
+    margin-right: 2em;
+  }
+
+  .userData {
+    width: 100%;
+    padding-right: 5em;
+  }
+
+  .userDataHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }

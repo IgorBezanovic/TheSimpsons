@@ -53,7 +53,7 @@ const Profile = () => {
               <Button variant="outlined" style={{ marginRight: "1em" }}>
                 Edit
               </Button>
-              <Button variant="outlined" onClick={logout}>
+              <Button variant="outlined" color="error" onClick={logout}>
                 Logout
               </Button>
             </div>
