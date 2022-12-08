@@ -2,16 +2,21 @@ import BaseHttpService from './base-http.service'
 
 const apiClient =  BaseHttpService();
 
-const getAll = async () => {
+const getAllProducts = async () => {
     return await apiClient.get(`products`);
 }
 
-const getById = async (id:number) => {
+const getProductById = async (id:number) => {
     return await apiClient.get(`products/${id}`);
 }
 
+const getProductGroups = async () => {
+    return await apiClient.get(`products/categories`);
+}
+
 const productServices = {
-    getAll,
-    getById,
+    getAllProducts,
+    getProductById,
+    getProductGroups,
 }
 export default productServices;
