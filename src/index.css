@@ -20,3 +20,27 @@ code {
 a { 
   text-decoration: none; 
 }
+
+.custom-product-card {
+  max-height: 350px !important;
+  min-height: 350px !important;
+}
+
+.MuiCardMedia-root{
+  object-fit: contain !important;
+  transition: transform .2s !important;
+}
+.MuiCardMedia-root:hover{
+  transform: scale(1.2) !important;
+  cursor: pointer !important;
+}
+
+.product-info-wrapper{
+  height: 110px !important;
+
+}
+.flex-direction-product-card{
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
