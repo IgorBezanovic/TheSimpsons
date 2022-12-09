@@ -102,12 +102,12 @@ const Home = () => {
           <Grid item xs={9} md={10}>
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={3}>
-                  {products &&
-                    products.map((product, index) => (
-                      <Grid item xs={6} md={3} key={index}>
-                        <ProductCard key={product.id} props={product} />
-                      </Grid>
-                    ))}
+                {products &&
+                  products.map((product, index) => (
+                    <Grid item xs={6} md={3} key={index}>
+                      <ProductCard key={product.id} props={product} />
+                    </Grid>
+                  ))}
               </Grid>
             </Box>
           </Grid>
