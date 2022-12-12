@@ -1,18 +1,25 @@
 import { Button } from "@mui/material";
 import styles from "./styles.module.css";
 import Quantity from "components/Quantity";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import CartContext from "context/cart/cart.context";
+import { CartItem } from "common/types/CartItem.type";
 
 const AddToCart = (props: any) => {
   const [quantity, setQuantity] = useState<number>(1);
 
-  const onQuantityChange = (q: number) => {
-    setQuantity(q);
-  };
+  const cartCtx = useContext(CartContext);
 
   const addToCart = () => {
-    console.log(props);
-    console.log(quantity);
+    const cartItem: CartItem = {
+      product: props.product,
+      quantity: quantity,
+    };
+    cartCtx.addToCart(cartItem);
+  };
+
+  const onQuantityChange = (q: number) => {
+    setQuantity(q);
   };
 
   return (

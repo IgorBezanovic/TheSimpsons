@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo_transparent.png";
@@ -7,9 +7,18 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import AuthContext from "context/user/auth.context";
+import CartContext from "context/cart/cart.context";
+import { Badge } from "@mui/material";
 
 export const Header = () => {
+  const [cartTotal, setCartTotal] = useState<number>(0);
+
   const authCtx = useContext(AuthContext);
+  const cartCtx = useContext(CartContext);
+
+  useEffect(() => {
+    setCartTotal(cartCtx.totalUniqueItems);
+  }, [cartCtx.totalUniqueItems]);
 
   return (
     <header className={styles.header}>
@@ -30,7 +39,11 @@ export const Header = () => {
           </nav>
           <div className="flex">
             <FavoriteBorderIcon className={styles.headerIcon} />
-            <ShoppingCartOutlinedIcon className={styles.headerIcon} />
+            <Link to={"/cart"}>
+              <Badge badgeContent={cartTotal} color="primary">
+                <ShoppingCartOutlinedIcon className={styles.headerIcon} />
+              </Badge>
+            </Link>
             {authCtx.isLoggedIn && (
               <Link to={"/profile"}>
                 <AccountCircleOutlinedIcon className={styles.headerIcon} />

@@ -1,0 +1,24 @@
+.card {
+  margin: 0 2em 1em 2em;
+  padding: 1em 1em;
+}
+
+.image {
+  width: 5em;
+  object-fit: cover;
+  margin-right: 3em;
+}
+
+.itemTitle {
+  margin: 0 2em 0.5em 0;
+}
+
+.itemPrice {
+  margin: 0;
+}
+
+.alignMiddle {
+  display: flex;
+  align-items: center;
+  margin-right: 2em;
+}

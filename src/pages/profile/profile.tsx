@@ -38,36 +38,40 @@ const Profile = () => {
 
   return (
     <AppLayout>
-      <div className={styles.userProfile}>
-        <img
-          className={styles.profileImage}
-          alt="ProfileImage"
-          src="https://st4.depositphotos.com/1012074/25277/v/600/depositphotos_252773324-stock-illustration-young-avatar-face-with-sunglasses.jpg"
-        ></img>
-        <div className={styles.userData}>
-          <div className={styles.userDataHeader}>
-            <h4>
-              {user?.name.firstname} {user?.name.lastname}
-            </h4>
-            <div>
-              <Button variant="outlined" style={{ marginRight: "1em" }}>
-                Edit
-              </Button>
-              <Button variant="outlined" color="error" onClick={logout}>
-                Logout
-              </Button>
+      {user ? (
+        <div className={styles.userProfile}>
+          <img
+            className={styles.profileImage}
+            alt="ProfileImage"
+            src="https://st4.depositphotos.com/1012074/25277/v/600/depositphotos_252773324-stock-illustration-young-avatar-face-with-sunglasses.jpg"
+          ></img>
+          <div className={styles.userData}>
+            <div className={styles.userDataHeader}>
+              <h4>
+                {user.name.firstname} {user.name.lastname}
+              </h4>
+              <div>
+                <Button variant="outlined" style={{ marginRight: "1em" }}>
+                  Edit
+                </Button>
+                <Button variant="outlined" color="error" onClick={logout}>
+                  Logout
+                </Button>
+              </div>
             </div>
+            <p>Email: {user.email}</p>
+            <p>
+              City: {user.address.city} {user.address.zipcode}
+            </p>
+            <p>
+              Address: {user.address.street} {user.address.number}
+            </p>
+            <p>Phone: {user.phone}</p>
           </div>
-          <p>Email: {user?.email}</p>
-          <p>
-            City: {user?.address.city} {user?.address.zipcode}
-          </p>
-          <p>
-            Address: {user?.address.street} {user?.address.number}
-          </p>
-          <p>Phone: {user?.phone}</p>
         </div>
-      </div>
+      ) : (
+        <p>Loading, please wait...</p>
+      )}
     </AppLayout>
   );
 };

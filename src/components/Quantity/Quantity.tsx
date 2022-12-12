@@ -5,7 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import styles from "./styles.module.css";
 
 const Quantity = (props: any) => {
-  const [quantity, setQuantity] = useState<number>(1);
+  const [quantity, setQuantity] = useState<number>(props.initQuantity ?? 1);
 
   useEffect(() => {
     onQuantityChangeHandler(quantity);
