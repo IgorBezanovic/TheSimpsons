@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { AppLayout } from "components/Layouts";
-import Headline from "components/Headline";
 import Input from "components/InputField";
 import { useFormik } from "formik";
 import { checkoutValidationSchema } from "common/validations/checkout-user";
@@ -43,7 +42,6 @@ const Checkout = () => {
 
   return (
     <AppLayout>
-      <Headline title="Checkout" />
       <div style={{maxWidth: '400px', width: "90%", margin: "0 auto"}}>
         <h2 style={{marginBottom: '30px'}}>Biling details:</h2>
         <form onSubmit={handleLogin}>

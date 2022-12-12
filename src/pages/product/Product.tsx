@@ -36,23 +36,25 @@ const Product = () => {
 
   return (
     <AppLayout>
-      <div className={styles.product}>
-        <img
-          src={product?.image}
-          alt="product"
-          className={styles.productImage}
-        />
-        <div>
-          <h2>{product?.title}</h2>
-          {product?.rating.rate && (
+      {product ? (
+        <div className={styles.product}>
+          <img
+            src={product.image}
+            alt="product"
+            className={styles.productImage}
+          />
+          <div>
+            <h2>{product.title}</h2>
             <Rating rating={product.rating.rate}></Rating>
-          )}
-          <p>{product?.price}</p>
-          <p>{product?.description}</p>
-          <AddToCart productId={product?.id}></AddToCart>
-          <p>Category: {product?.category}</p>
+            <p>${product.price}</p>
+            <p>{product.description}</p>
+            <AddToCart product={product}></AddToCart>
+            <p>Category: {product.category}</p>
+          </div>
         </div>
-      </div>
+      ) : (
+        <p>Loading, please wait...</p>
+      )}
     </AppLayout>
   );
 };

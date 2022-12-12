@@ -1,10 +1,24 @@
 .product {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  padding: 1em;
 }
 
 .productImage {
   width: 20em;
   margin-right: 3em;
   object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .product {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .productImage {
+    width: 20em;
+    margin-right: 3em;
+    object-fit: contain;
+  }
 }
