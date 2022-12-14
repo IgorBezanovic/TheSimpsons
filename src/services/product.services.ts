@@ -14,9 +14,14 @@ const getProductGroups = async () => {
   return await apiClient.get(`products/categories`);
 };
 
+const getProductFromGroup = async (category: string) => {
+  return await apiClient.get(`products/category/${category}`);
+};
+
 const productServices = {
   getAllProducts,
   getProductById,
   getProductGroups,
+  getProductFromGroup,
 };
 export default productServices;

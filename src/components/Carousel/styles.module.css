@@ -1,0 +1,20 @@
+.carouselWrapper {
+  overflow: hidden; 
+  padding: 0 20px;
+}
+
+.carouselBody {
+  width: 100%; 
+  display: flex; 
+  overflow-x: scroll;
+}
+
+.carouselBody::-webkit-scrollbar {
+  display: none;
+}
+
+.cardWrapper {
+  width: 200px;
+  min-width: 200px;
+  margin: 5px;
+}

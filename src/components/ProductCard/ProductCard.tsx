@@ -1,7 +1,9 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import { productType } from "common/types/Product.type";
+import { useNavigate } from "react-router-dom";
 
 export const ProductCard = ({ props } : {props: productType}) => {
+  const navigate = useNavigate();
 
   return (
     <Card sx={{ maxWidth: 345 }} className="custom-product-card flex-direction-product-card">
@@ -11,6 +13,7 @@ export const ProductCard = ({ props } : {props: productType}) => {
           alt={props.title}
           height="140"
           image={props.image}
+          onClick={() => navigate(`/product/${props.id}`)}
         />
         <CardContent className="product-info-wrapper flex-direction-product-card">
           <Typography gutterBottom variant="subtitle1" component="div">
@@ -22,7 +25,7 @@ export const ProductCard = ({ props } : {props: productType}) => {
         </CardContent>
       </div>
       <CardActions style={{justifyContent: 'flex-end'}}>
-        <Button size="small">View product</Button>
+        <Button size="small" onClick={() => navigate(`/product/${props.id}`)}>View product</Button>
       </CardActions>
     </Card>
   );
