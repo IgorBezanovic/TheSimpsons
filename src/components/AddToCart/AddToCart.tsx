@@ -4,11 +4,13 @@ import Quantity from "components/Quantity";
 import { useContext, useState } from "react";
 import CartContext from "context/cart/cart.context";
 import { CartItem } from "common/types/CartItem.type";
+import WishlistContext from "context/wishlist/wishlist.context";
 
 const AddToCart = (props: any) => {
   const [quantity, setQuantity] = useState<number>(1);
 
   const cartCtx = useContext(CartContext);
+  const wishlistCtx = useContext(WishlistContext);
 
   const addToCart = () => {
     const cartItem: CartItem = {
@@ -16,6 +18,7 @@ const AddToCart = (props: any) => {
       quantity: quantity,
     };
     cartCtx.addToCart(cartItem);
+    wishlistCtx.removeFromWishlist(cartItem.product.id);
   };
 
   const onQuantityChange = (q: number) => {

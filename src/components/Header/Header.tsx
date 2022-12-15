@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo_transparent.png";
@@ -9,16 +9,16 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import AuthContext from "context/user/auth.context";
 import CartContext from "context/cart/cart.context";
 import { Badge } from "@mui/material";
+import WishlistContext from "context/wishlist/wishlist.context";
 
 export const Header = () => {
-  const [cartTotal, setCartTotal] = useState<number>(0);
-
   const authCtx = useContext(AuthContext);
   const cartCtx = useContext(CartContext);
+  const wishlistCtx = useContext(WishlistContext);
 
-  useEffect(() => {
-    setCartTotal(cartCtx.totalUniqueItems);
-  }, [cartCtx.totalUniqueItems]);
+  const openWishlist = () => {
+    wishlistCtx.open();
+  };
 
   return (
     <header className={styles.header}>
@@ -32,15 +32,17 @@ export const Header = () => {
               <Link to={"/"}>
                 <li className={styles.nav_item}>Home</li>
               </Link>
-              <Link to={"/example"}>
-                <li className={styles.nav_item}>Example</li>
-              </Link>
             </ul>
           </nav>
           <div className="flex">
-            <FavoriteBorderIcon className={styles.headerIcon} />
+            <Badge badgeContent={wishlistCtx.totalItems} color="primary">
+              <FavoriteBorderIcon
+                className={styles.headerIcon}
+                onClick={openWishlist}
+              />
+            </Badge>
             <Link to={"/cart"}>
-              <Badge badgeContent={cartTotal} color="primary">
+              <Badge badgeContent={cartCtx.totalUniqueItems} color="primary">
                 <ShoppingCartOutlinedIcon className={styles.headerIcon} />
               </Badge>
             </Link>

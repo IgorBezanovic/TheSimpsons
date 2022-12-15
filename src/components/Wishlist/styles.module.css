@@ -1,0 +1,11 @@
+.flexBetween {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  align-items: center;
+}
+
+.close {
+  padding-right: 0;
+}

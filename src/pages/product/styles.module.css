@@ -28,8 +28,8 @@
   align-items: center;
 }
 
-.fancyLine { 
-  border: 0; 
+.fancyLine {
+  border: 0;
   height: 0;
   margin-top: 50px;
   margin-bottom: 75px;
@@ -40,19 +40,30 @@
   height: 1em;
 }
 .fancyLine:after {
-  content:'';
+  content: "";
   height: 0.5em;
   top: 1px;
 }
 
-.fancyLine:before, .fancyLine:after {
-  content: '';
+.fancyLine:before,
+.fancyLine:after {
+  content: "";
   position: absolute;
   width: 100%;
 }
 
-.fancyLine, .fancyLine:before {
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 75%);
+.fancyLine,
+.fancyLine:before {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0) 75%
+  );
+}
+
+.addTo {
+  display: flex;
+  flex-direction: row;
 }
 
 @media (min-width: 768px) {
