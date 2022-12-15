@@ -1,6 +1,6 @@
 import { Cart } from "common/types/Cart.type";
 import { CartItem } from "common/types/CartItem.type";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 const EMPTY_CART: Cart = {
   id: 1,
@@ -15,6 +15,7 @@ const CartContext = createContext<{
   addToCart: (item: CartItem) => void;
   removeFromCart: (itemId: number) => void;
   updateItemQuantity: (itemId: number, quantity: number) => void;
+  setInitValues: () => void;
 }>({
   cart: EMPTY_CART,
   totalUniqueItems: 0,
@@ -22,6 +23,7 @@ const CartContext = createContext<{
   addToCart: (item: CartItem) => {},
   removeFromCart: (itemId: number) => {},
   updateItemQuantity: (itemId: number, quantity: number) => {},
+  setInitValues: () => {},
 });
 
 export const CartContextProvider = (props: any) => {
@@ -29,13 +31,13 @@ export const CartContextProvider = (props: any) => {
   const [totalUniqueItems, setTotalUniqueItems] = useState<number>(0);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  useEffect(() => {
-    initialCart();
+  const setInitValues = () => {
+    setInitialCart();
     calcTotalPrice();
     calcTotalUniqueItems();
-  }, []);
+  };
 
-  const initialCart = () => {
+  const setInitialCart = () => {
     setCart(() => {
       const lsCart = localStorage.getItem("cart");
 
@@ -179,6 +181,7 @@ export const CartContextProvider = (props: any) => {
         addToCart,
         removeFromCart,
         updateItemQuantity,
+        setInitValues,
       }}
     >
       {props.children}

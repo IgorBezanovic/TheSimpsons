@@ -1,0 +1,16 @@
+.image {
+  width: 5em;
+  object-fit: cover;
+}
+
+.details {
+  margin: 0.5em 0 0.5em 0;
+}
+
+.item {
+  margin-bottom: 1em;
+}
+
+.addToCart {
+  cursor: pointer;
+}
