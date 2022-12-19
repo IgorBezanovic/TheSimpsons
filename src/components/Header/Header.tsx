@@ -10,11 +10,15 @@ import AuthContext from "context/user/auth.context";
 import CartContext from "context/cart/cart.context";
 import { Badge } from "@mui/material";
 import WishlistContext from "context/wishlist/wishlist.context";
+import { useTranslation } from "react-i18next";
+import LanguageSelect from "components/LanguageSelect";
 
 export const Header = () => {
   const authCtx = useContext(AuthContext);
   const cartCtx = useContext(CartContext);
   const wishlistCtx = useContext(WishlistContext);
+
+  const { t } = useTranslation();
 
   const openWishlist = () => {
     wishlistCtx.open();
@@ -30,11 +34,13 @@ export const Header = () => {
           <nav>
             <ul className={styles.nav_items}>
               <Link to={"/"}>
-                <li className={styles.nav_item}>Home</li>
+                <li className={styles.nav_item}>{t("homePage")}</li>
               </Link>
             </ul>
           </nav>
-          <div className="flex">
+
+          <div className={styles.header_content}>
+            <LanguageSelect />
             <Badge badgeContent={wishlistCtx.totalItems} color="primary">
               <FavoriteBorderIcon
                 className={styles.headerIcon}

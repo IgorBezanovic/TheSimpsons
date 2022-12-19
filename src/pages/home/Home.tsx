@@ -16,6 +16,7 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import ProductCard from "components/ProductCard";
+import { useTranslation } from "react-i18next";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -27,6 +28,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Home = () => {
   const loadingCtx = useContext(LoadingContext);
+  const { t } = useTranslation();
 
   const [productGroups, setProductGroups] = useState<[string]>();
   const [products, setProducts] = useState<[productType]>();
@@ -46,7 +48,7 @@ const Home = () => {
       loadingCtx.hide();
     } catch (error) {
       loadingCtx.hide();
-      toast.info("Unable to fetch product groups");
+      toast.info(t("unableToFetchGroups"));
     }
   };
 
@@ -60,7 +62,7 @@ const Home = () => {
       loadingCtx.hide();
     } catch (error) {
       loadingCtx.hide();
-      toast.info("Unable to fetch products");
+      toast.info(t("unableToFetchProducts"));
     }
   };
 
@@ -79,18 +81,20 @@ const Home = () => {
           </Grid>
           <Grid item xs={9} md={10}>
             <FormControl fullWidth>
-              <InputLabel id="category-select-label">Category</InputLabel>
+              <InputLabel id="category-select-label">
+                {t("category")}
+              </InputLabel>
               <Select
                 labelId="category-select-label"
                 id="category-select"
                 value={category}
-                label="Category"
+                label={t("category")}
                 onChange={handleChange}
               >
                 {productGroups &&
                   productGroups.map((product) => (
                     <MenuItem key={product} value={product}>
-                      {product}
+                      {t(product)}
                     </MenuItem>
                   ))}
               </Select>

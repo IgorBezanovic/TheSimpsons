@@ -6,10 +6,13 @@ import { checkoutValidationSchema } from "common/validations/checkout-user";
 import { Button } from "@mui/material";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Checkout = () => {
-  const [errors, setErrors] = useState<any>()
+  const [errors, setErrors] = useState<any>();
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: {
@@ -34,19 +37,19 @@ const Checkout = () => {
     e.preventDefault();
     setErrors(formik.errors);
 
-    if(Object.keys(formik.errors).length === 0){
-      toast.success("Your order has sent.");
+    if (Object.keys(formik.errors).length === 0) {
+      toast.success(t("orderSent"));
       navigate("/");
     }
   };
 
   return (
     <AppLayout>
-      <div style={{maxWidth: '400px', width: "90%", margin: "0 auto"}}>
-        <h2 style={{marginBottom: '30px'}}>Biling details:</h2>
+      <div style={{ maxWidth: "400px", width: "90%", margin: "0 auto" }}>
+        <h2 style={{ marginBottom: "30px" }}>{t("billingDetails")}:</h2>
         <form onSubmit={handleLogin}>
           <Input
-            label="First name"
+            label={t("firstName")}
             type="text"
             name="firstname"
             error={Boolean(errors && errors.firstname)}
@@ -55,7 +58,7 @@ const Checkout = () => {
             errorMessage={errors && errors.firstname}
           />
           <Input
-            label="Last name"
+            label={t("lastName")}
             type="text"
             name="lastname"
             error={Boolean(errors && errors.lastname)}
@@ -63,9 +66,9 @@ const Checkout = () => {
             value={formik.values.lastname}
             errorMessage={errors && errors.lastname}
           />
-          <div style={{display: 'flex', gap: '10px'}}>
+          <div style={{ display: "flex", gap: "10px" }}>
             <Input
-              label="Street address"
+              label={t("address")}
               type="text"
               name="street"
               error={Boolean(errors && errors.street)}
@@ -74,17 +77,19 @@ const Checkout = () => {
               errorMessage={errors && errors.street}
             />
             <Input
-              label="House number"
+              label={t("houseNumber")}
               type="text"
               name="number"
               error={Boolean(errors && errors.number)}
               onChange={formik.handleChange}
-              value={`${formik.values.number !== 0 ? formik.values.number : ''}`}
+              value={`${
+                formik.values.number !== 0 ? formik.values.number : ""
+              }`}
               errorMessage={errors && errors.number}
             />
           </div>
           <Input
-            label="Town / City"
+            label={t("city")}
             type="text"
             name="city"
             error={Boolean(errors && errors.city)}
@@ -93,25 +98,27 @@ const Checkout = () => {
             errorMessage={errors && errors.city}
           />
           <Input
-            label="Zip Code"
+            label={t("zipCode")}
             type="text"
             name="zipcode"
             error={Boolean(errors && errors.zipcode)}
             onChange={formik.handleChange}
-            value={`${formik.values.zipcode !== 0 ? formik.values.zipcode : ''}`}
+            value={`${
+              formik.values.zipcode !== 0 ? formik.values.zipcode : ""
+            }`}
             errorMessage={errors && errors.zipcode}
           />
           <Input
-            label="Phone"
+            label={t("phone")}
             type="text"
             name="phone"
             error={Boolean(errors && errors.phone)}
             onChange={formik.handleChange}
-            value={`${formik.values.phone !== 0 ? formik.values.phone : ''}`}
+            value={`${formik.values.phone !== 0 ? formik.values.phone : ""}`}
             errorMessage={errors && errors.phone}
           />
           <Input
-            label="Email address"
+            label={t("email")}
             type="text"
             name="email"
             error={Boolean(errors && errors.email)}
@@ -119,9 +126,9 @@ const Checkout = () => {
             value={formik.values.email}
             errorMessage={errors && errors.email}
           />
-        <Button variant="outlined" type="submit">
-          Submit
-        </Button>
+          <Button variant="outlined" type="submit">
+            {t("submit")}
+          </Button>
         </form>
       </div>
     </AppLayout>

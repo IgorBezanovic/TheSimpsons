@@ -1,12 +1,24 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 import { productType } from "common/types/Product.type";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-export const ProductCard = ({ props } : {props: productType}) => {
+export const ProductCard = ({ props }: { props: productType }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
-    <Card sx={{ maxWidth: 345 }} className="custom-product-card flex-direction-product-card">
+    <Card
+      sx={{ maxWidth: 345 }}
+      className="custom-product-card flex-direction-product-card"
+    >
       <div>
         <CardMedia
           component="img"
@@ -17,15 +29,19 @@ export const ProductCard = ({ props } : {props: productType}) => {
         />
         <CardContent className="product-info-wrapper flex-direction-product-card">
           <Typography gutterBottom variant="subtitle1" component="div">
-              {props.title.length > 45 ? props.title.slice(0, 45) + "..." : props.title}
+            {props.title.length > 45
+              ? props.title.slice(0, 45) + "..."
+              : props.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {props.price} $
+            ${props.price}
           </Typography>
         </CardContent>
       </div>
-      <CardActions style={{justifyContent: 'flex-end'}}>
-        <Button size="small" onClick={() => navigate(`/product/${props.id}`)}>View product</Button>
+      <CardActions style={{ justifyContent: "flex-end" }}>
+        <Button size="small" onClick={() => navigate(`/product/${props.id}`)}>
+          {t("viewProduct")}
+        </Button>
       </CardActions>
     </Card>
   );

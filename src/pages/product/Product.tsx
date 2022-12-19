@@ -1,6 +1,6 @@
 import CartContext from "context/cart/cart.context";
 import { Fragment, useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { productType } from "common/types/Product.type";
 import { AppLayout } from "components/Layouts";
@@ -12,6 +12,7 @@ import productServices from "services/product.services";
 import styles from "./styles.module.css";
 import { Chip } from "@mui/material";
 import AddToWishlist from "components/AddToWishlist";
+import { useTranslation } from "react-i18next";
 
 const Product = () => {
   const { id } = useParams();
@@ -23,6 +24,9 @@ const Product = () => {
   const loadingCtx = useContext(LoadingContext);
   const cartCtx = useContext(CartContext);
 
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
   useEffect(() => {
     updateIsInCart();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -33,6 +37,13 @@ const Product = () => {
       if (id) {
         loadingCtx.show();
         const res = await productServices.getProductById(id);
+
+        if (!res.data) {
+          loadingCtx.hide();
+          toast.error(t("productDoesNotExist"));
+          navigate("/");
+        }
+
         setProduct(res.data);
 
         const category = await productServices.getProductFromGroup(
@@ -43,7 +54,8 @@ const Product = () => {
       }
     } catch (error) {
       loadingCtx.hide();
-      toast.error("Product does not exist");
+      toast.error(t("productDoesNotExist"));
+      navigate("/");
     }
   };
 
@@ -62,7 +74,7 @@ const Product = () => {
   useEffect(() => {
     loadProductByIdHandler();
     // eslint-disable-next-line
-  }, []);
+  }, [id]);
 
   return (
     <AppLayout>
@@ -79,9 +91,9 @@ const Product = () => {
               <Rating rating={product.rating.rate}></Rating>
               <h4 className={styles.productPrice}>${product.price}</h4>
               <div className={styles.productCategoryWrapper}>
-                <p>Category:</p>
+                <p>{t("category")}:</p>
                 <Chip
-                  label={product.category}
+                  label={t(product.category)}
                   variant="outlined"
                   style={{ marginLeft: "10px" }}
                 />
@@ -101,14 +113,14 @@ const Product = () => {
             <hr className={styles.fancyLine}></hr>
           </div>
           <Chip
-            label="Items from same category:"
+            label={t("itemsFromTheSameCategory")}
             variant="outlined"
             style={{ margin: "0 0 20px 20px" }}
           />
           <Carousel productFromCategory={productFromCategory} />
         </Fragment>
       ) : (
-        <p>Loading, please wait...</p>
+        <p>{t("loading")}</p>
       )}
     </AppLayout>
   );
