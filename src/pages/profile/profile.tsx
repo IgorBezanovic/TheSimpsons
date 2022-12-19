@@ -7,10 +7,13 @@ import styles from "./styles.module.css";
 import AuthContext from "context/user/auth.context";
 import LoadingContext from "context/loading/loading.context";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
   const authCtx = useContext(AuthContext);
   const loadingCtx = useContext(LoadingContext);
+
+  const { t } = useTranslation();
 
   const [user, setUser] = useState<userType>();
 
@@ -23,7 +26,7 @@ const Profile = () => {
       loadingCtx.hide();
     } catch (error) {
       loadingCtx.hide();
-      toast.info("Unable to fetch user profile data");
+      toast.info(t("unableToFetchUser"));
     }
   };
 
@@ -51,26 +54,27 @@ const Profile = () => {
                 {user.name.firstname} {user.name.lastname}
               </h4>
               <div>
-                <Button variant="outlined" style={{ marginRight: "1em" }}>
-                  Edit
-                </Button>
                 <Button variant="outlined" color="error" onClick={logout}>
-                  Logout
+                  {t("logout")}
                 </Button>
               </div>
             </div>
-            <p>Email: {user.email}</p>
             <p>
-              City: {user.address.city} {user.address.zipcode}
+              {t("email")}: {user.email}
             </p>
             <p>
-              Address: {user.address.street} {user.address.number}
+              {t("city")}: {user.address.city} {user.address.zipcode}
             </p>
-            <p>Phone: {user.phone}</p>
+            <p>
+              {t("address")}: {user.address.street} {user.address.number}
+            </p>
+            <p>
+              {t("phone")}: {user.phone}
+            </p>
           </div>
         </div>
       ) : (
-        <p>Loading, please wait...</p>
+        <p>{t("loading")}</p>
       )}
     </AppLayout>
   );

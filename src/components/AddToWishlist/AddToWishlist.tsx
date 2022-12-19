@@ -5,10 +5,13 @@ import { productType } from "common/types/Product.type";
 import WishlistContext from "context/wishlist/wishlist.context";
 import { Wishlist } from "common/types/Wishlist.type";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
+import { useTranslation } from "react-i18next";
 
 const AddToWishlist = ({ product }: { product: productType }) => {
   const [wishlisted, setWishlisted] = useState<boolean>(false);
   const wishlistCtx = useContext(WishlistContext);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     isInLs();
@@ -45,13 +48,13 @@ const AddToWishlist = ({ product }: { product: productType }) => {
 
   return wishlisted ? (
     <IconButton aria-label="removeFromWishlist" onClick={removeFromWishlist}>
-      <Tooltip title="Remove from wishlist">
+      <Tooltip title={t("removeFromWishlist")}>
         <HeartBrokenIcon />
       </Tooltip>
     </IconButton>
   ) : (
     <IconButton aria-label="addToWishlist" onClick={addToWishlist}>
-      <Tooltip title="Add to wishlist">
+      <Tooltip title={t("addToWishlist")}>
         <FavoriteIcon />
       </Tooltip>
     </IconButton>

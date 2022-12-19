@@ -4,8 +4,11 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { footerItemsOne, footerItemsTwo } from "common/footer-items";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className={styles.footer}>
       <div className={styles.footerColumn}>
@@ -19,7 +22,7 @@ const Footer = () => {
             key={item.id + item.name}
             className={`${index === 0 ? styles.header : styles.text}`}
           >
-            {item.name}
+            {t(item.name)}
           </a>
         ))}
       </div>
@@ -31,7 +34,7 @@ const Footer = () => {
             key={item.id + item.name}
             className={`${index === 0 ? styles.header : styles.text}`}
           >
-            {item.name}
+            {t(item.name)}
           </a>
         ))}
       </div>

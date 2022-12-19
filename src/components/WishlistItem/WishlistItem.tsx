@@ -6,10 +6,12 @@ import { useContext } from "react";
 import WishlistContext from "context/wishlist/wishlist.context";
 import CartContext from "context/cart/cart.context";
 import { CartItem } from "common/types/CartItem.type";
+import { useTranslation } from "react-i18next";
 
 const WishlistItem = ({ item }: { item: productType }) => {
   const wishlistCtx = useContext(WishlistContext);
   const cartCtx = useContext(CartContext);
+  const { t } = useTranslation();
 
   const addToCartRemoveFromWishlist = () => {
     wishlistCtx.removeFromWishlist(item.id);
@@ -31,7 +33,7 @@ const WishlistItem = ({ item }: { item: productType }) => {
           <h5 className={styles.details}>{item.title}</h5>
           <p className={styles.details}>${item.price}</p>
           <p className={styles.addToCart} onClick={addToCartRemoveFromWishlist}>
-            Add to cart
+            {t("addToCart")}
           </p>
         </div>
       </Grid>

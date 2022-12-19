@@ -4,10 +4,12 @@ import { Fragment, useContext } from "react";
 import WishlistItem from "components/WishlistItem/WishlistItem";
 import styles from "./styles.module.css";
 import CloseIcon from "@mui/icons-material/Close";
+import { useTranslation } from "react-i18next";
 
 const Wishlist = () => {
   const wishlistCtx = useContext(WishlistContext);
   const noWishlistItems = wishlistCtx.wishlist.products.length;
+  const { t } = useTranslation();
 
   const close = () => {
     wishlistCtx.close();
@@ -32,7 +34,7 @@ const Wishlist = () => {
     >
       <Fragment>
         <div className={styles.flexBetween}>
-          <h5>Your wishlist</h5>
+          <h5>{t("yourWishlist")}</h5>
 
           <IconButton
             aria-label="delete"
@@ -48,7 +50,7 @@ const Wishlist = () => {
             <WishlistItem key={item.id} item={item}></WishlistItem>
           ))
         ) : (
-          <p>Your wishlist is empty</p>
+          <p>{t("yourWishlistIsEmpty")}</p>
         )}
       </Fragment>
     </Drawer>

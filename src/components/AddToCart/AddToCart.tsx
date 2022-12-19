@@ -5,12 +5,15 @@ import { useContext, useState } from "react";
 import CartContext from "context/cart/cart.context";
 import { CartItem } from "common/types/CartItem.type";
 import WishlistContext from "context/wishlist/wishlist.context";
+import { useTranslation } from "react-i18next";
 
 const AddToCart = (props: any) => {
   const [quantity, setQuantity] = useState<number>(1);
 
   const cartCtx = useContext(CartContext);
   const wishlistCtx = useContext(WishlistContext);
+
+  const { t } = useTranslation();
 
   const addToCart = () => {
     const cartItem: CartItem = {
@@ -29,7 +32,7 @@ const AddToCart = (props: any) => {
     <div className={styles.addToCart}>
       <Quantity onQuantityChange={onQuantityChange}></Quantity>
       <Button variant="contained" onClick={addToCart}>
-        Add to cart
+        {t("addToCart")}
       </Button>
     </div>
   );

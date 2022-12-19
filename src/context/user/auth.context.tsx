@@ -4,6 +4,7 @@ import authService from "services/auth.services";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const AuthContext = createContext({
   isLoggedIn: false,
@@ -14,6 +15,7 @@ const AuthContext = createContext({
 
 export const AuthContextProvider = (props: any) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const decodedToken = () => {
     const token = localStorage.getItem("accessToken") ?? "";
@@ -51,7 +53,7 @@ export const AuthContextProvider = (props: any) => {
       setIsLoggedIn(true);
       navigate("/");
     } catch (error) {
-      toast.error("Bad credentials", {
+      toast.error(t("badCredentials"), {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
