@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import {
-  HomePage,
+  ShopPage,
   NotFoundPage,
   CartPage,
   LoginPage,
@@ -35,7 +35,7 @@ function App() {
     <CartContextProvider>
       <WishlistContextProvider>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<ShopPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route
             path="/profile"

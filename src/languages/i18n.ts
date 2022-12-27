@@ -13,6 +13,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    lng: localStorage.getItem('i18nextLng') ? localStorage.getItem('i18nextLng')! : 'en',
     resources: {
       en: {
         translation: TRANSLATIONS_EN,

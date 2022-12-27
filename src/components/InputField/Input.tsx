@@ -28,7 +28,7 @@ const Input = ({
       type={type}
       label={label}
       helperText={isError && errorMessage}
-      className={styles.marginBottom30}
+      className={label !== 'Search' ? styles.marginBottom30 : styles.marginBottom0}
       onChange={onChange}
       fullWidth
       defaultValue={value}

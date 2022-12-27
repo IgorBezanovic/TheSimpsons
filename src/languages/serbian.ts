@@ -49,4 +49,12 @@ export const TRANSLATIONS_RS = {
   unableToFetchGroups: "Nije moguće preuzeti grupe proizvoda",
   unableToFetchProducts: "Nije moguće preuzeti proizvode",
   unableToFetchUser: "Nije moguće preuzeti podatke o korisniku",
+  resetFilters: "Poništi filtere",
+  noProducts: "Nema proizvoda",
+  sort: "Sortiraj proizvode",
+  titleAscending: "Naziv uzlazni",
+  titleDescending: "Naziv silazni",
+  priceAscending: "Cena uzlazni",
+  priceDescending: "Cena silazna",
+  search: "Pretraga",
 };
