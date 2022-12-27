@@ -7,12 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import { productType } from "common/types/Product.type";
-import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-export const ProductCard = ({ props }: { props: productType }) => {
+export const ProductCard = ({ props, t }: { props: productType, t: any }) => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
   return (
     <Card

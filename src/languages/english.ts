@@ -49,4 +49,12 @@ export const TRANSLATIONS_EN = {
   unableToFetchGroups: "Unable to fetch product groups",
   unableToFetchProducts: "Unable to fetch products",
   unableToFetchUser: "Unabel to fetch user data",
+  resetFilters: "Reset filters",
+  noProducts: "There are no products",
+  sort: "Sort products",
+  titleAscending: "Title ascending",
+  titleDescending: "Title descending",
+  priceAscending: "Price ascending",
+  priceDescending: "Price descending",
+  search: "Search",
 };
