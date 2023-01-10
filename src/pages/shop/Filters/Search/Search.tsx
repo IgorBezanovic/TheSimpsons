@@ -1,18 +1,18 @@
-import { InputAdornment, TextField } from "@mui/material";
-import { forwardRef, useImperativeHandle, useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import { useTranslation } from "react-i18next";
+import SearchIcon from '@mui/icons-material/Search';
+import { InputAdornment, TextField } from '@mui/material';
+import { forwardRef, useImperativeHandle, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Search = forwardRef((props: any, ref: any) => {
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>('');
   const { t } = useTranslation();
 
   useImperativeHandle(ref, () => {
     return {
       resetSearch() {
-        setSearch("");
-        props.onSearchChange("");
-      },
+        setSearch('');
+        props.onSearchChange('');
+      }
     };
   });
 
@@ -24,17 +24,17 @@ const Search = forwardRef((props: any, ref: any) => {
   return (
     <TextField
       fullWidth
-      id="outlined-basic"
-      label={t("search")}
+      id='outlined-basic'
+      label={t('search')}
       value={search}
-      variant="outlined"
+      variant='outlined'
       onChange={onSearchChange}
       InputProps={{
         startAdornment: (
-          <InputAdornment position="start">
+          <InputAdornment position='start'>
             <SearchIcon />
           </InputAdornment>
-        ),
+        )
       }}
     />
   );

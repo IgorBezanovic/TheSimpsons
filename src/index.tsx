@@ -1,26 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { AuthContextProvider } from "context/user/auth.context";
-import { LoadingContextProvider } from "context/loading/loading.context";
-import Spinner from "components/Spinner/spinner";
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { UserContextProvider } from 'context/user/user.context';
+import { LoadingContextProvider } from 'context/loading/loading.context';
+import Spinner from 'components/Spinner/Spinner';
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <BrowserRouter>
     <ToastContainer />
     <LoadingContextProvider>
       <Spinner />
-      <AuthContextProvider>
+      <UserContextProvider>
         <App />
-      </AuthContextProvider>
+      </UserContextProvider>
     </LoadingContextProvider>
   </BrowserRouter>
 );

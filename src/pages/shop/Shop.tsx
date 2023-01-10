@@ -1,29 +1,28 @@
-import { Button, Grid } from "@mui/material";
-import { productType } from "common/types/Product.type";
-import { AppLayout } from "components/Layouts";
-import ProductCard from "components/ProductCard";
-import LoadingContext from "context/loading/loading.context";
-import { useContext, useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
-import productServices from "services/product.services";
-import CategoryFilter from "./Filters/Category/CategoryFilter";
-import PriceFilter from "./Filters/Price/PriceFilter";
-import Search from "./Filters/Search";
-import Sort from "./Filters/Sort";
-import styles from "./styles.module.css";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Button, Grid } from '@mui/material';
+import { Product } from 'common/types/Product.type';
+import { AppLayout } from 'components/Layouts';
+import ProductCard from 'components/ProductCard';
+import LoadingContext from 'context/loading/loading.context';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import productServices from 'services/product.services';
+import CategoryFilter from './Filters/Category/CategoryFilter';
+import PriceFilter from './Filters/Price/PriceFilter';
+import Search from './Filters/Search';
+import Sort from './Filters/Sort';
+import styles from './styles.module.css';
 
 const Shop = () => {
-  const [productsByCategory, setProductsByCategory] = useState<productType[]>(
-    []
-  );
-  const [filteredProducts, setFilteredProducts] = useState<productType[]>([]);
+  const [productsByCategory, setProductsByCategory] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
   const [minMaxPricesFromCategory, setMinMaxPricesFromCategory] = useState<
     [number, number]
   >([0, 0]);
   const [minMaxPrices, setMinMaxPrices] = useState<[number, number]>([0, 0]);
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>('');
 
   const loadingCtx = useContext(LoadingContext);
   const { t } = useTranslation();
@@ -34,12 +33,10 @@ const Shop = () => {
 
   useEffect(() => {
     fetchAllProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     onFilterChange();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [minMaxPrices, search]);
 
   const fetchAllProducts = async () => {
@@ -51,7 +48,7 @@ const Shop = () => {
       calcMinMaxPrices(products.data);
       loadingCtx.hide();
     } catch (error) {
-      toast.info(t("unableToFetchProducts"));
+      toast.info(t('unableToFetchProducts'));
       loadingCtx.hide();
     }
   };
@@ -65,13 +62,13 @@ const Shop = () => {
       calcMinMaxPrices(products.data);
       loadingCtx.hide();
     } catch (error) {
-      toast.info(t("unableToFetchProducts"));
+      toast.info(t('unableToFetchProducts'));
       loadingCtx.hide();
     }
   };
 
-  const calcMinMaxPrices = (products: productType[]) => {
-    const prices = products.map((p) => p.price);
+  const calcMinMaxPrices = (products: Product[]) => {
+    const prices = products.map(p => p.price);
     const min = Math.min(...prices);
     const max = Math.max(...prices);
 
@@ -83,7 +80,7 @@ const Shop = () => {
     const min = minMaxPrices[0];
     const max = minMaxPrices[1];
 
-    const productMatches = productsByCategory.filter((product) => {
+    const productMatches = productsByCategory.filter(product => {
       const priceMatch = product.price >= min && product.price <= max;
 
       const searchMatch = product.title
@@ -116,21 +113,21 @@ const Shop = () => {
   };
 
   const onSortChange = (sortBy: string) => {
-    if (sortBy === "titleAsc") {
+    if (sortBy === 'titleAsc') {
       setFilteredProducts([
-        ...filteredProducts.sort((a, b) => (a.title > b.title ? 1 : -1)),
+        ...filteredProducts.sort((a, b) => (a.title > b.title ? 1 : -1))
       ]);
-    } else if (sortBy === "titleDesc") {
+    } else if (sortBy === 'titleDesc') {
       setFilteredProducts([
-        ...filteredProducts.sort((a, b) => (a.title < b.title ? 1 : -1)),
+        ...filteredProducts.sort((a, b) => (a.title < b.title ? 1 : -1))
       ]);
-    } else if (sortBy === "priceAsc") {
+    } else if (sortBy === 'priceAsc') {
       setFilteredProducts([
-        ...filteredProducts.sort((a, b) => a.price - b.price),
+        ...filteredProducts.sort((a, b) => a.price - b.price)
       ]);
-    } else if (sortBy === "priceDesc") {
+    } else if (sortBy === 'priceDesc') {
       setFilteredProducts([
-        ...filteredProducts.sort((a, b) => b.price - a.price),
+        ...filteredProducts.sort((a, b) => b.price - a.price)
       ]);
     } else {
       setFilteredProducts([...filteredProducts.sort((a, b) => a.id - b.id)]);
@@ -149,7 +146,7 @@ const Shop = () => {
             />
           </div>
 
-          <hr style={{ marginBottom: "2em" }} />
+          <hr style={{ marginBottom: '2em' }} />
 
           <div className={styles.filterItem}>
             <PriceFilter
@@ -158,36 +155,36 @@ const Shop = () => {
             />
           </div>
 
-          <hr style={{ marginBottom: "2em" }} />
+          <hr style={{ marginBottom: '2em' }} />
 
           <div className={styles.filterItem}>
             <Search onSearchChange={onSearchChange} ref={searchRef} />
           </div>
 
-          <hr style={{ marginBottom: "2em" }} />
+          <hr style={{ marginBottom: '2em' }} />
 
           <div className={styles.filterItem}>
-            <Button variant="outlined" fullWidth onClick={resetFilters}>
-              {t("resetFilters")}
+            <Button variant='outlined' fullWidth onClick={resetFilters}>
+              {t('resetFilters')}
             </Button>
           </div>
         </Grid>
         <Grid item xs={12} md={9} lg={10}>
-          <Grid container justifyContent={"end"} sx={{ marginBottom: "2em" }}>
+          <Grid container justifyContent={'end'} sx={{ marginBottom: '2em' }}>
             <Grid item xs={12} md={3}>
               <Sort onSortChange={onSortChange} ref={sortRef} />
             </Grid>
           </Grid>
           <Grid container spacing={3}>
             {filteredProducts?.length ? (
-              filteredProducts.map((product) => (
+              filteredProducts.map(product => (
                 <Grid item xs={6} md={4} lg={3} key={product.id}>
                   <ProductCard key={product.id} props={product} t={t} />
                 </Grid>
               ))
             ) : (
               <Grid item xs={12}>
-                <h2>{t("noProducts")}</h2>
+                <h2>{t('noProducts')}</h2>
               </Grid>
             )}
           </Grid>

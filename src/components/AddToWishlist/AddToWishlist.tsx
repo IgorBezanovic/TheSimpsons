@@ -1,13 +1,14 @@
-import { IconButton, Tooltip } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useContext, useEffect, useState } from "react";
-import { productType } from "common/types/Product.type";
-import WishlistContext from "context/wishlist/wishlist.context";
-import { Wishlist } from "common/types/Wishlist.type";
-import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
-import { useTranslation } from "react-i18next";
+/* eslint-disable react-hooks/exhaustive-deps */
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
+import { IconButton, Tooltip } from '@mui/material';
+import { Product } from 'common/types/Product.type';
+import { Wishlist } from 'common/types/Wishlist.type';
+import WishlistContext from 'context/wishlist/wishlist.context';
+import { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const AddToWishlist = ({ product }: { product: productType }) => {
+const AddToWishlist = ({ product }: { product: Product }) => {
   const [wishlisted, setWishlisted] = useState<boolean>(false);
   const wishlistCtx = useContext(WishlistContext);
 
@@ -15,11 +16,10 @@ const AddToWishlist = ({ product }: { product: productType }) => {
 
   useEffect(() => {
     isInLs();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wishlistCtx.wishlist.products]);
 
   const isInLs = () => {
-    const lsWishlist = localStorage.getItem("wishlist");
+    const lsWishlist = localStorage.getItem('wishlist');
 
     if (lsWishlist) {
       const wishlist: Wishlist = JSON.parse(lsWishlist);
@@ -29,7 +29,7 @@ const AddToWishlist = ({ product }: { product: productType }) => {
         Boolean(wishlist.userId) &&
         Boolean(wishlist.products)
       ) {
-        const prod = wishlist.products.find((p) => p.id === product.id);
+        const prod = wishlist.products.find(p => p.id === product.id);
 
         setWishlisted(Boolean(prod));
       }
@@ -47,14 +47,14 @@ const AddToWishlist = ({ product }: { product: productType }) => {
   };
 
   return wishlisted ? (
-    <IconButton aria-label="removeFromWishlist" onClick={removeFromWishlist}>
-      <Tooltip title={t("removeFromWishlist")}>
+    <IconButton aria-label='removeFromWishlist' onClick={removeFromWishlist}>
+      <Tooltip title={t('removeFromWishlist')}>
         <HeartBrokenIcon />
       </Tooltip>
     </IconButton>
   ) : (
-    <IconButton aria-label="addToWishlist" onClick={addToWishlist}>
-      <Tooltip title={t("addToWishlist")}>
+    <IconButton aria-label='addToWishlist' onClick={addToWishlist}>
+      <Tooltip title={t('addToWishlist')}>
         <FavoriteIcon />
       </Tooltip>
     </IconButton>

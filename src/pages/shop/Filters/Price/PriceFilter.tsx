@@ -1,6 +1,6 @@
-import { Chip, Slider } from "@mui/material";
-import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
+import { Chip, Slider } from '@mui/material';
+import { Box } from '@mui/system';
+import { useEffect, useState } from 'react';
 
 const PriceFilter = (props: any) => {
   const [minMaxPrices, setMinMaxPrices] = useState<number[]>([1, 1000]);
@@ -26,11 +26,11 @@ const PriceFilter = (props: any) => {
       <Slider
         value={minMaxPrices}
         onChange={onPriceChange}
-        valueLabelDisplay="auto"
+        valueLabelDisplay='auto'
         min={min}
         max={max}
       />
-      <Chip label="Apply filter price" onClick={onApplyFilterPrice} />
+      <Chip label='Apply filter price' onClick={onApplyFilterPrice} />
     </Box>
   );
 };

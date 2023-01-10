@@ -1,40 +1,57 @@
-import React, { useContext, useState } from "react";
-import Headline from "components/Headline";
-import Input from "components/InputField";
-import Footer from "components/Footer";
-import Button from "@mui/material/Button";
-import styles from "./styles.module.css";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import { lightBlue, red } from "@mui/material/colors";
-import { userDTO } from "common/types/Login.type";
-import AuthContext from "context/user/auth.context";
-import LoadingContext from "context/loading/loading.context";
-import { useTranslation } from "react-i18next";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import Button from '@mui/material/Button';
+import { lightBlue, red } from '@mui/material/colors';
+import { UserDTO } from 'common/types/Login.type';
+import Footer from 'components/Footer';
+import Headline from 'components/Headline';
+import Input from 'components/InputField';
+import LoadingContext from 'context/loading/loading.context';
+import UserContext from 'context/user/user.context';
+import { useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import styles from './styles.module.css';
 
 const Login = () => {
-  const authCtx = useContext(AuthContext);
+  const userCtx = useContext(UserContext);
   const loadingCtx = useContext(LoadingContext);
 
   const [isError, setIsError] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [loginUserDTO, setLoginUserDTO] = useState<userDTO>({
-    username: "",
-    password: "",
+  const [loginUserDTO, setLoginUserDTO] = useState<UserDTO>({
+    username: '',
+    password: ''
   });
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const handleLogin = async (event: any) => {
     event.preventDefault();
 
     if (!loginUserDTO.username)
-      return [console.log("Username is empty"), setIsError(true)];
+      return [console.log('Username is empty'), setIsError(true)];
     if (!loginUserDTO.password)
-      return [console.log("Password is empty"), setIsError(true)];
+      return [console.log('Password is empty'), setIsError(true)];
 
     loadingCtx.show();
-    await authCtx.onLogin(loginUserDTO);
+
+    try {
+      await userCtx.onLogin(loginUserDTO);
+      navigate('/');
+    } catch (error) {
+      toast.error(t('badCredentials'), {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        theme: 'light'
+      });
+    }
+
     loadingCtx.hide();
   };
 
@@ -48,21 +65,25 @@ const Login = () => {
 
   return (
     <div className={styles.loadingWrapper}>
-      <Headline title={t("login")} />
+      <Headline title={t('login')} />
       <div className={styles.displayWrapper}>
         <Input
-          label={t("username")}
-          type="text"
+          label={t('username')}
+          type='text'
           error={!loginUserDTO.username && isError}
-          onChange={(e: React.BaseSyntheticEvent<Event>) => handleUserData("username", e.target.value)}
+          onChange={(e: React.BaseSyntheticEvent<Event>) =>
+            handleUserData('username', e.target.value)
+          }
           value={loginUserDTO.username}
         />
         <div className={styles.passwordWrapper}>
           <Input
-            label={t("password")}
-            type={isVisible ? "text" : "password"}
+            label={t('password')}
+            type={isVisible ? 'text' : 'password'}
             error={!loginUserDTO.password && isError}
-            onChange={(e: React.BaseSyntheticEvent<Event>) => handleUserData("password", e.target.value)}
+            onChange={(e: React.BaseSyntheticEvent<Event>) =>
+              handleUserData('password', e.target.value)
+            }
             value={loginUserDTO.password}
           />
           <div className={styles.visibilityWrapper}>
@@ -81,15 +102,15 @@ const Login = () => {
             )}
           </div>
         </div>
-        <Button variant="outlined" onClick={handleLogin}>
-          {t("submit")}
+        <Button variant='outlined' onClick={handleLogin}>
+          {t('submit')}
         </Button>
         <p className={styles.userData}>
-          {t("testUser")} <br />
+          {t('testUser')} <br />
           <em>
-            <strong>{t("username")}: </strong>johnd
+            <strong>{t('username')}: </strong>johnd
             <br />
-            <strong>{t("password")}: </strong>m38rmF$
+            <strong>{t('password')}: </strong>m38rmF$
           </em>
         </p>
       </div>

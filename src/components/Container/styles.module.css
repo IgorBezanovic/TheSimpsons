@@ -1,17 +1,16 @@
-
 .container {
-    margin: auto;
+  margin: auto;
 }
 .full {
-    width: 100%;
+  width: 100%;
 }
 .xl {
-    max-width: 1200px;
+  max-width: 1200px;
 }
 
 .sm {
-    max-width: 900px;
+  max-width: 900px;
 }
 .xs {
-    max-width: 600px;
+  max-width: 600px;
 }

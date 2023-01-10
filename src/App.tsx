@@ -1,31 +1,25 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from 'react-router-dom';
 import {
   ShopPage,
   NotFoundPage,
   CartPage,
   LoginPage,
-  ProfilePage,
+  UserPage,
   CheckoutPage,
-  ProductPage,
-} from "pages";
-import { useContext } from "react";
-import AuthContext from "context/user/auth.context";
-import { CartContextProvider } from "context/cart/cart.context";
-import { WishlistContextProvider } from "context/wishlist/wishlist.context";
-import Wishlist from "components/Wishlist";
+  ProductPage
+} from 'pages';
+import { useContext } from 'react';
+import UserContext from 'context/user/user.context';
+import { CartContextProvider } from 'context/cart/cart.context';
+import { WishlistContextProvider } from 'context/wishlist/wishlist.context';
+import Wishlist from 'components/Wishlist';
 
 function App() {
-  const authCtx = useContext(AuthContext);
+  const userCtx = useContext(UserContext);
 
-  const ProtectedRoute = ({
-    isLoggedIn,
-    children,
-  }: {
-    isLoggedIn: boolean;
-    children: any;
-  }) => {
-    if (!isLoggedIn) {
-      return <Navigate to="/login" replace />;
+  const ProtectedRoute = ({ children }: { children: any }) => {
+    if (!userCtx.isLoggedIn) {
+      return <Navigate to='/login' replace />;
     }
 
     return children;
@@ -35,27 +29,27 @@ function App() {
     <CartContextProvider>
       <WishlistContextProvider>
         <Routes>
-          <Route path="/" element={<ShopPage />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route path='/' element={<ShopPage />} />
+          <Route path='/cart' element={<CartPage />} />
           <Route
-            path="/profile"
+            path='/profile'
             element={
-              <ProtectedRoute isLoggedIn={authCtx.isLoggedIn}>
-                <ProfilePage />
+              <ProtectedRoute>
+                <UserPage />
               </ProtectedRoute>
             }
           />
           <Route
-            path="/checkout"
+            path='/checkout'
             element={
-              <ProtectedRoute isLoggedIn={authCtx.isLoggedIn}>
+              <ProtectedRoute>
                 <CheckoutPage />
               </ProtectedRoute>
             }
           />
-          <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path='/product/:id' element={<ProductPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
         <Wishlist></Wishlist>
       </WishlistContextProvider>

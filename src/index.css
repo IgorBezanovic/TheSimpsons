@@ -12,13 +12,12 @@ code {
     monospace;
 }
 
-
 /* HELPERS */
 .flex {
   display: flex;
 }
-a { 
-  text-decoration: none; 
+a {
+  text-decoration: none;
 }
 
 .custom-product-card {
@@ -26,20 +25,21 @@ a {
   min-height: 350px !important;
 }
 
-.MuiCardMedia-root{
+.MuiCardMedia-root {
   object-fit: contain !important;
-  transition: transform .2s !important;
+  transition: transform 0.2s !important;
 }
-.MuiCardMedia-root:hover{
+
+.MuiCardMedia-root:hover {
   transform: scale(1.2) !important;
   cursor: pointer !important;
 }
 
-.product-info-wrapper{
+.product-info-wrapper {
   height: 110px !important;
-
 }
-.flex-direction-product-card{
+
+.flex-direction-product-card {
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;

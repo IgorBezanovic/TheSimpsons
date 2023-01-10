@@ -1,4 +1,4 @@
-import BaseHttpService from "./base-http.service";
+import BaseHttpService from './base-http.service';
 
 const apiClient = BaseHttpService();
 
@@ -7,7 +7,7 @@ const userProfile = async (id: number) => {
 };
 
 const userService = {
-  userProfile,
+  userProfile
 };
 
 export default userService;

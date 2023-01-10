@@ -1,11 +1,11 @@
-import { Cart } from "common/types/Cart.type";
-import { CartItem } from "common/types/CartItem.type";
-import { createContext, useState } from "react";
+import { Cart } from 'common/types/Cart.type';
+import { CartItem } from 'common/types/CartItem.type';
+import { createContext, useState } from 'react';
 
 const EMPTY_CART: Cart = {
   id: 1,
   userId: 1,
-  products: [],
+  products: []
 };
 
 const CartContext = createContext<{
@@ -23,7 +23,7 @@ const CartContext = createContext<{
   addToCart: (item: CartItem) => {},
   removeFromCart: (itemId: number) => {},
   updateItemQuantity: (itemId: number, quantity: number) => {},
-  setInitValues: () => {},
+  setInitValues: () => {}
 });
 
 export const CartContextProvider = (props: any) => {
@@ -39,7 +39,7 @@ export const CartContextProvider = (props: any) => {
 
   const setInitialCart = () => {
     setCart(() => {
-      const lsCart = localStorage.getItem("cart");
+      const lsCart = localStorage.getItem('cart');
 
       if (lsCart) {
         const cart: Cart = JSON.parse(lsCart);
@@ -59,8 +59,8 @@ export const CartContextProvider = (props: any) => {
   };
 
   const addToCart = (item: CartItem) => {
-    setCart((prevCart) => {
-      const lsCart = localStorage.getItem("cart");
+    setCart(prevCart => {
+      const lsCart = localStorage.getItem('cart');
 
       if (lsCart) {
         const cart: Cart = JSON.parse(lsCart);
@@ -69,7 +69,7 @@ export const CartContextProvider = (props: any) => {
           cart.products.push(item);
         } else {
           const product = cart.products.find(
-            (p) => p.product.id === item.product.id
+            p => p.product.id === item.product.id
           );
 
           if (product) {
@@ -79,14 +79,14 @@ export const CartContextProvider = (props: any) => {
           }
         }
 
-        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem('cart', JSON.stringify(cart));
 
         calcTotalUniqueItems();
 
         return cart;
       } else {
         prevCart?.products.push(item);
-        localStorage.setItem("cart", JSON.stringify(prevCart));
+        localStorage.setItem('cart', JSON.stringify(prevCart));
 
         calcTotalUniqueItems();
 
@@ -96,23 +96,23 @@ export const CartContextProvider = (props: any) => {
   };
 
   const removeFromCart = (itemId: number) => {
-    setCart((prevCart) => {
-      const lsCart = localStorage.getItem("cart");
+    setCart(prevCart => {
+      const lsCart = localStorage.getItem('cart');
 
       if (lsCart) {
         const cart: Cart = JSON.parse(lsCart);
 
-        const index = cart.products.findIndex((p) => p.product.id === itemId);
+        const index = cart.products.findIndex(p => p.product.id === itemId);
 
         cart.products.splice(index, 1);
 
-        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem('cart', JSON.stringify(cart));
         calcTotalUniqueItems();
         calcTotalPrice();
 
         return cart;
       } else {
-        localStorage.setItem("cart", JSON.stringify(prevCart));
+        localStorage.setItem('cart', JSON.stringify(prevCart));
         calcTotalUniqueItems();
         calcTotalPrice();
 
@@ -122,24 +122,24 @@ export const CartContextProvider = (props: any) => {
   };
 
   const updateItemQuantity = (itemId: number, quantity: number) => {
-    setCart((prevCart) => {
-      const lsCart = localStorage.getItem("cart");
+    setCart(prevCart => {
+      const lsCart = localStorage.getItem('cart');
 
       if (lsCart) {
         const cart: Cart = JSON.parse(lsCart);
 
-        const product = cart.products.find((p) => p.product.id === itemId);
+        const product = cart.products.find(p => p.product.id === itemId);
 
         if (product) {
           product.quantity = quantity;
         }
 
-        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem('cart', JSON.stringify(cart));
         calcTotalPrice();
 
         return cart;
       } else {
-        localStorage.setItem("cart", JSON.stringify(prevCart));
+        localStorage.setItem('cart', JSON.stringify(prevCart));
 
         calcTotalPrice();
 
@@ -149,7 +149,7 @@ export const CartContextProvider = (props: any) => {
   };
 
   const calcTotalPrice = () => {
-    const lsCart = localStorage.getItem("cart");
+    const lsCart = localStorage.getItem('cart');
 
     if (lsCart) {
       const cart: Cart = JSON.parse(lsCart);
@@ -163,7 +163,7 @@ export const CartContextProvider = (props: any) => {
   };
 
   const calcTotalUniqueItems = () => {
-    const lsCart = localStorage.getItem("cart");
+    const lsCart = localStorage.getItem('cart');
 
     if (lsCart) {
       const cart: Cart = JSON.parse(lsCart);
@@ -181,7 +181,7 @@ export const CartContextProvider = (props: any) => {
         addToCart,
         removeFromCart,
         updateItemQuantity,
-        setInitValues,
+        setInitValues
       }}
     >
       {props.children}
