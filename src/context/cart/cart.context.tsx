@@ -16,6 +16,7 @@ const CartContext = createContext<{
   removeFromCart: (itemId: number) => void;
   updateItemQuantity: (itemId: number, quantity: number) => void;
   setInitValues: () => void;
+  setCartToEmpty: () => void;
 }>({
   cart: EMPTY_CART,
   totalUniqueItems: 0,
@@ -23,7 +24,8 @@ const CartContext = createContext<{
   addToCart: (item: CartItem) => {},
   removeFromCart: (itemId: number) => {},
   updateItemQuantity: (itemId: number, quantity: number) => {},
-  setInitValues: () => {}
+  setInitValues: () => {},
+  setCartToEmpty: () => {}
 });
 
 export const CartContextProvider = (props: any) => {
@@ -169,7 +171,14 @@ export const CartContextProvider = (props: any) => {
       const cart: Cart = JSON.parse(lsCart);
 
       setTotalUniqueItems(cart.products.length);
+    } else {
+      setTotalUniqueItems(0);
     }
+  };
+
+  const setCartToEmpty = () => {
+    setCart(EMPTY_CART);
+    calcTotalUniqueItems();
   };
 
   return (
@@ -181,7 +190,8 @@ export const CartContextProvider = (props: any) => {
         addToCart,
         removeFromCart,
         updateItemQuantity,
-        setInitValues
+        setInitValues,
+        setCartToEmpty
       }}
     >
       {props.children}

@@ -2,8 +2,9 @@ import { Button } from '@mui/material';
 import { checkoutValidationSchema } from 'common/validations/checkout-user';
 import Input from 'components/InputField';
 import { AppLayout } from 'components/Layouts';
+import CartContext from 'context/cart/cart.context';
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -11,7 +12,8 @@ import { toast } from 'react-toastify';
 const Checkout = () => {
   const [errors, setErrors] = useState<any>();
   const navigate = useNavigate();
-
+  const cartCtx = useContext(CartContext);
+  
   const { t } = useTranslation();
 
   const formik = useFormik({
@@ -38,6 +40,8 @@ const Checkout = () => {
     setErrors(formik.errors);
 
     if (Object.keys(formik.errors).length === 0) {
+      localStorage.removeItem('cart');
+      cartCtx.setCartToEmpty();
       toast.success(t('orderSent'));
       navigate('/');
     }
