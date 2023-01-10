@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContextProvider } from 'context/user/user.context';
 import { LoadingContextProvider } from 'context/loading/loading.context';
-import Spinner from 'components/Spinner/Spinner';
+import Spinner from 'components/Spinner';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
