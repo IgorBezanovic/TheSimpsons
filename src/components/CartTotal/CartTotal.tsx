@@ -1,10 +1,12 @@
-import { Card } from "@mui/material";
-import Button from "@mui/material/Button/Button";
-import CartContext from "context/cart/cart.context";
-import { useContext, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import styles from "./styles.module.css";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Card } from '@mui/material';
+import Button from '@mui/material/Button/Button';
+import CartContext from 'context/cart/cart.context';
+import { LocalizedPrice } from 'languages/LocalizedPrice';
+import { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import styles from './styles.module.css';
 
 const CartTotal = () => {
   const [total, setTotal] = useState<number>(0);
@@ -20,7 +22,6 @@ const CartTotal = () => {
   useEffect(() => {
     updateTotalPrice();
     updateTotalGrossPrice();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartCtx.totalPrice]);
 
   const updateTotalPrice = () => {
@@ -38,29 +39,37 @@ const CartTotal = () => {
   return (
     <Card className={styles.total}>
       <div className={styles.flexBetween}>
-        <h4>{t("subtotal")}</h4>
-        <h4>${total}</h4>
+        <h4>{t('subtotal')}</h4>
+        <h4>
+          <LocalizedPrice price={total}></LocalizedPrice>
+        </h4>
       </div>
       <div className={styles.additions}>
         <div className={styles.flexBetween}>
-          <p>{t("shipping")}</p>
-          <p>${shipping}</p>
+          <p>{t('shipping')}</p>
+          <p>
+            <LocalizedPrice price={shipping}></LocalizedPrice>
+          </p>
         </div>
         <div className={styles.flexBetween}>
-          <p>{t("flatRate")}:</p>
-          <p>${flatRate}</p>
+          <p>{t('flatRate')}:</p>
+          <p>
+            <LocalizedPrice price={flatRate}></LocalizedPrice>
+          </p>
         </div>
       </div>
       <div className={styles.flexBetween}>
-        <h4>{t("total")}:</h4>
-        <h4>${totalGross}</h4>
+        <h4>{t('total')}:</h4>
+        <h4>
+          <LocalizedPrice price={totalGross}></LocalizedPrice>
+        </h4>
       </div>
       <Button
-        variant="contained"
+        variant='contained'
         className={styles.checkout}
-        onClick={() => navigate("/checkout")}
+        onClick={() => navigate('/checkout')}
       >
-        {t("proceedToCheckout")}
+        {t('proceedToCheckout')}
       </Button>
     </Card>
   );

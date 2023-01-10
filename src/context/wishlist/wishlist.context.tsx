@@ -1,11 +1,11 @@
-import { productType } from "common/types/Product.type";
-import { Wishlist } from "common/types/Wishlist.type";
-import { createContext, useState } from "react";
+import { Product } from 'common/types/Product.type';
+import { Wishlist } from 'common/types/Wishlist.type';
+import { createContext, useState } from 'react';
 
 const EMPTY_WISHLIST: Wishlist = {
   id: 1,
   userId: 1,
-  products: [],
+  products: []
 };
 
 const WishlistContext = createContext({
@@ -14,9 +14,9 @@ const WishlistContext = createContext({
   totalItems: 0,
   open: () => {},
   close: () => {},
-  addToWishlist: (item: productType) => {},
+  addToWishlist: (item: Product) => {},
   removeFromWishlist: (itemId: number) => {},
-  setInitValues: () => {},
+  setInitValues: () => {}
 });
 
 export const WishlistContextProvider = (props: any) => {
@@ -31,7 +31,7 @@ export const WishlistContextProvider = (props: any) => {
 
   const initialWishlist = () => {
     setWishlist(() => {
-      const lsWishlist = localStorage.getItem("wishlist");
+      const lsWishlist = localStorage.getItem('wishlist');
 
       if (lsWishlist) {
         const wishlist: Wishlist = JSON.parse(lsWishlist);
@@ -51,9 +51,9 @@ export const WishlistContextProvider = (props: any) => {
     });
   };
 
-  const addToWishlist = (item: productType) => {
-    setWishlist((prevWishlist) => {
-      const lsWishlist = localStorage.getItem("wishlist");
+  const addToWishlist = (item: Product) => {
+    setWishlist(prevWishlist => {
+      const lsWishlist = localStorage.getItem('wishlist');
 
       if (lsWishlist) {
         const wishlist: Wishlist = JSON.parse(lsWishlist);
@@ -61,7 +61,7 @@ export const WishlistContextProvider = (props: any) => {
         if (wishlist.products.length === 0) {
           wishlist.products.push(item);
         } else {
-          const product = wishlist.products.find((p) => p.id === item.id);
+          const product = wishlist.products.find(p => p.id === item.id);
 
           if (product) {
             return prevWishlist;
@@ -70,13 +70,13 @@ export const WishlistContextProvider = (props: any) => {
           }
         }
 
-        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
         calcNumberOfItems();
 
         return wishlist;
       } else {
         prevWishlist.products.push(item);
-        localStorage.setItem("wishlist", JSON.stringify(prevWishlist));
+        localStorage.setItem('wishlist', JSON.stringify(prevWishlist));
         calcNumberOfItems();
 
         return prevWishlist;
@@ -85,22 +85,22 @@ export const WishlistContextProvider = (props: any) => {
   };
 
   const removeFromWishlist = (itemId: number) => {
-    setWishlist((prevWishlist) => {
-      const lsWishlist = localStorage.getItem("wishlist");
+    setWishlist(prevWishlist => {
+      const lsWishlist = localStorage.getItem('wishlist');
 
       if (lsWishlist) {
         const wishlist: Wishlist = JSON.parse(lsWishlist);
 
-        const index = wishlist.products.findIndex((p) => p.id === itemId);
+        const index = wishlist.products.findIndex(p => p.id === itemId);
 
         wishlist.products.splice(index, 1);
 
-        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
         calcNumberOfItems();
 
         return wishlist;
       } else {
-        localStorage.setItem("wishlist", JSON.stringify(prevWishlist));
+        localStorage.setItem('wishlist', JSON.stringify(prevWishlist));
         calcNumberOfItems();
 
         return prevWishlist;
@@ -109,7 +109,7 @@ export const WishlistContextProvider = (props: any) => {
   };
 
   const calcNumberOfItems = () => {
-    const lsWishlist = localStorage.getItem("wishlist");
+    const lsWishlist = localStorage.getItem('wishlist');
 
     if (lsWishlist) {
       const wishlist: Wishlist = JSON.parse(lsWishlist);
@@ -136,7 +136,7 @@ export const WishlistContextProvider = (props: any) => {
         close,
         addToWishlist,
         removeFromWishlist,
-        setInitValues,
+        setInitValues
       }}
     >
       {props.children}

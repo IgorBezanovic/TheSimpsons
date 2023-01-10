@@ -40,14 +40,14 @@
   height: 1em;
 }
 .fancyLine:after {
-  content: "";
+  content: '';
   height: 0.5em;
   top: 1px;
 }
 
 .fancyLine:before,
 .fancyLine:after {
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
 }

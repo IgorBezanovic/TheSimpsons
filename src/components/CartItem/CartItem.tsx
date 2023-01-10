@@ -1,11 +1,13 @@
-import styles from "./styles.module.css";
-import Card from "@mui/material/Card";
-import { CartItem as CartItemType } from "common/types/CartItem.type";
-import Quantity from "components/Quantity";
-import { Grid, IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { useContext, useEffect, useState } from "react";
-import CartContext from "context/cart/cart.context";
+/* eslint-disable react-hooks/exhaustive-deps */
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Grid, IconButton } from '@mui/material';
+import Card from '@mui/material/Card';
+import { CartItem as CartItemType } from 'common/types/CartItem.type';
+import Quantity from 'components/Quantity';
+import CartContext from 'context/cart/cart.context';
+import { LocalizedPrice } from 'languages/LocalizedPrice';
+import { useContext, useEffect, useState } from 'react';
+import styles from './styles.module.css';
 
 const CartItem = ({ cartItem }: { cartItem: CartItemType }) => {
   const [quantity, setQuantity] = useState<number>(0);
@@ -14,7 +16,6 @@ const CartItem = ({ cartItem }: { cartItem: CartItemType }) => {
 
   useEffect(() => {
     calcTotalPrice();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quantity]);
 
   const calcTotalPrice = () => {
@@ -38,13 +39,16 @@ const CartItem = ({ cartItem }: { cartItem: CartItemType }) => {
           <img
             className={styles.image}
             src={cartItem.product.image}
-            alt="item"
+            alt='item'
           ></img>
         </Grid>
         <Grid item xs={12} sm={9} md={5} lg={5}>
           <div>
             <h5 className={styles.itemTitle}>{cartItem.product.title}</h5>
-            <p className={styles.itemPrice}>${cartItem.product.price} X 1</p>
+            <p className={styles.itemPrice}>
+              <LocalizedPrice price={cartItem.product.price}></LocalizedPrice> x
+              1
+            </p>
           </div>
         </Grid>
         <Grid item xs={6} sm={3} md={2} lg={2}>
@@ -54,11 +58,13 @@ const CartItem = ({ cartItem }: { cartItem: CartItemType }) => {
           ></Quantity>
         </Grid>
         <Grid item xs={6} sm={8} md={2} lg={2}>
-          <p>${totalPrice}</p>
+          <p>
+            <LocalizedPrice price={totalPrice}></LocalizedPrice>
+          </p>
         </Grid>
 
         <Grid item xs={1} sm={1} md={1} lg={1}>
-          <IconButton aria-label="delete" onClick={removeItem}>
+          <IconButton aria-label='delete' onClick={removeItem}>
             <DeleteIcon />
           </IconButton>
         </Grid>

@@ -1,1 +1,1 @@
-export { default } from "./PriceFilter";
+export { default } from './PriceFilter';

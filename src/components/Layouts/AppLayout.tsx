@@ -1,10 +1,12 @@
-import React, { ReactNode, useContext, useEffect } from "react";
-import Header from "components/Header";
-import Footer from "components/Footer";
-import styles from "./styles.module.css";
-import Container from "components/Container";
-import CartContext from "context/cart/cart.context";
-import WishlistContext from "context/wishlist/wishlist.context";
+/* eslint-disable react-hooks/exhaustive-deps */
+import Container from 'components/Container';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import CartContext from 'context/cart/cart.context';
+import WishlistContext from 'context/wishlist/wishlist.context';
+import { ReactNode, useContext, useEffect } from 'react';
+import styles from './styles.module.css';
+
 interface IProps {
   children?: ReactNode;
 }
@@ -16,7 +18,6 @@ const AppLayout: React.FC<IProps> = ({ children }) => {
   useEffect(() => {
     cartCtx.setInitValues();
     wishlistCtx.setInitValues();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

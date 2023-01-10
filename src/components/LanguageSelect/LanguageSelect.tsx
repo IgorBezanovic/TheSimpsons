@@ -2,15 +2,15 @@ import {
   FormControl,
   MenuItem,
   Select,
-  SelectChangeEvent,
-} from "@mui/material";
-import { useState } from "react";
-import { languages } from "../../languages/i18n";
-import i18n from "i18next";
+  SelectChangeEvent
+} from '@mui/material';
+import i18n from 'i18next';
+import { useState } from 'react';
+import { languages } from '../../languages/i18n';
 
 const LanguageSelect = () => {
   const [language, setLanguage] = useState<string>(
-    localStorage.getItem("i18nextLng") ?? ""
+    localStorage.getItem('i18nextLng') ?? ''
   );
 
   const handleLanguageChange = (event: SelectChangeEvent) => {
@@ -20,9 +20,9 @@ const LanguageSelect = () => {
   };
 
   return (
-    <FormControl size="small">
+    <FormControl size='small'>
       <Select value={language} onChange={handleLanguageChange}>
-        {languages.map((lang) => (
+        {languages.map(lang => (
           <MenuItem key={lang.code} value={lang.code}>
             {lang.name}
           </MenuItem>

@@ -62,5 +62,12 @@
   },
   "devDependencies": {
     "@types/redux": "^3.6.0"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "jsxSingleQuote": true,
+    "singleQuote": true,
+    "trailingComma": "none"
   }
 }

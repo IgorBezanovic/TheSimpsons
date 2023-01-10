@@ -1,1 +1,1 @@
-export { default } from "./Quantity";
+export { default } from './Quantity';

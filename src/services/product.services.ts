@@ -1,4 +1,4 @@
-import BaseHttpService from "./base-http.service";
+import BaseHttpService from './base-http.service';
 
 const apiClient = BaseHttpService();
 
@@ -22,6 +22,6 @@ const productServices = {
   getAllProducts,
   getProductById,
   getProductGroups,
-  getProductFromGroup,
+  getProductFromGroup
 };
 export default productServices;

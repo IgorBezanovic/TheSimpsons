@@ -1,9 +1,9 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react';
 
 const LoadingContext = createContext({
   isOpen: false,
   show: () => {},
-  hide: () => {},
+  hide: () => {}
 });
 
 export const LoadingContextProvider = (props: any) => {

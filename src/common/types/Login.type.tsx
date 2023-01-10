@@ -1,9 +1,9 @@
-export type userDTO = {
+export type UserDTO = {
   username: string;
   password: string;
 };
 
-export type decodedUser = {
+export type DecodedUser = {
   iat: number;
   sub: number;
   user: string;
